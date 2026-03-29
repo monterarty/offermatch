@@ -24,10 +24,10 @@ export default function Pricing() {
               <div className="text-[40px] font-extrabold leading-none mb-1 tracking-tight text-blue">
                 Бесплатно
               </div>
-              <div className="text-[12.5px] text-t3 mb-6 font-normal">Безлимит генераций · карта не&nbsp;нужна</div>
+              <div className="text-[12.5px] text-t3 mb-6 font-normal">2 генерации · карта не&nbsp;нужна</div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature>Безлимит: анализ + улучшение резюме + сопроводительное</PricingFeature>
+                <PricingFeature>2 полных цикла: анализ + улучшение резюме + сопроводительное</PricingFeature>
                 <PricingFeature>Подробный match-отчёт</PricingFeature>
                 <PricingFeature>Скачать резюме в&nbsp;PDF / DOCX</PricingFeature>
                 <PricingFeature>Без регистрации — прямо в&nbsp;Telegram</PricingFeature>
