@@ -58,10 +58,10 @@ export default function Pricing() {
               <div className="text-[12.5px] text-t3 mb-6 font-normal">без автопродления · доступ 7 дней</div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature side>Анализ резюме по&nbsp;8 критериям — 10&nbsp;раз</PricingFeature>
-                <PricingFeature side>Адаптация резюме под вакансию</PricingFeature>
+                <PricingFeature side>10 полноценных откликов с&nbsp;адаптацией и&nbsp;сопроводительным</PricingFeature>
+                <PricingFeature side>Анализ резюме по&nbsp;8 критериям</PricingFeature>
+                <PricingFeature side>Адаптация резюме под вакансию — 10&nbsp;генераций</PricingFeature>
                 <PricingFeature side>Интервью с&nbsp;ИИ-ассистентом</PricingFeature>
-                <PricingFeature side>Сопроводительные письма — 10&nbsp;генераций</PricingFeature>
                 <PricingFeature side>Мэтч-механика — подбор вакансий + свайп</PricingFeature>
               </ul>
 
@@ -90,10 +90,10 @@ export default function Pricing() {
               <div className="text-[12.5px] text-t3 mb-6 font-normal">без автопродления · доступ 30 дней · <span className="text-green font-semibold">−25%</span></div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature side>Анализ резюме по&nbsp;8 критериям — 40&nbsp;раз</PricingFeature>
-                <PricingFeature side>Адаптация резюме под вакансию</PricingFeature>
+                <PricingFeature side>40 полноценных откликов с&nbsp;адаптацией и&nbsp;сопроводительным</PricingFeature>
+                <PricingFeature side>Анализ резюме по&nbsp;8 критериям</PricingFeature>
+                <PricingFeature side>Адаптация резюме под вакансию — 40&nbsp;генераций</PricingFeature>
                 <PricingFeature side>Интервью с&nbsp;ИИ-ассистентом</PricingFeature>
-                <PricingFeature side>Сопроводительные письма — 40&nbsp;генераций</PricingFeature>
                 <PricingFeature side>Мэтч-механика — подбор вакансий + свайп</PricingFeature>
               </ul>
 
