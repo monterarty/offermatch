@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+:root {
+  /* Surfaces */
+  --white: #ffffff;
+  --bg: #F6F7FB;
+  --bg2: #EEEEF6;
+  --surface: #ffffff;
+  --surface2: #F0F2FA;
+  --border: #E4E6F0;
+  --border2: #CDD1E8;
+
+  /* Text */
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --navy3: #334155;
+  --t2: #64748B;
+  --t3: #94A3B8;
+  --t4: #CBD5E1;
+
+  /* Blue accent */
+  --blue: #3B7EF8;
+  --blue-l: #EBF2FF;
+  --blue-m: #BFDBFE;
+  --blue-d: #2563EB;
+  --blue-side: #8FB7FF;
+
+  /* Success / match */
+  --green: #00C837;
+  --green-l: #E6FFEE;
+  --green-m: #A3F5BC;
+
+  /* Semantic extras */
+  --amber: #D97706;
+  --amber-l: #FEF3C7;
+  --coral: #FF007F;
+  --coral-l: #FFE6F2;
+}
+
+@theme inline {
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-border: var(--border);
+  --color-border2: var(--border2);
+
+  --color-navy: var(--navy);
+  --color-navy2: var(--navy2);
+  --color-navy3: var(--navy3);
+  --color-t2: var(--t2);
+  --color-t3: var(--t3);
+  --color-t4: var(--t4);
+
+  --color-blue: var(--blue);
+  --color-blue-l: var(--blue-l);
+  --color-blue-m: var(--blue-m);
+  --color-blue-d: var(--blue-d);
+  --color-blue-side: var(--blue-side);
+
+  --color-green: var(--green);
+  --color-green-l: var(--green-l);
+  --color-green-m: var(--green-m);
+
+  --color-amber: var(--amber);
+  --color-amber-l: var(--amber-l);
+  --color-coral: var(--coral);
+  --color-coral-l: var(--coral-l);
+
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--navy);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Subtle mesh background animation */
+@keyframes mesh-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-40px, 30px); }
+}
+
+@keyframes mesh-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+}
+
+@keyframes mesh-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-20px, 20px); }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+}
+
+.mesh-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(59, 126, 248, 0.055);
+  top: -200px;
+  right: -100px;
+  animation: mesh-float-1 20s ease-in-out infinite;
+}
+
+.mesh-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(22, 163, 74, 0.035);
+  bottom: -150px;
+  left: -80px;
+  animation: mesh-float-2 24s ease-in-out infinite;
+}
+
+.mesh-orb-3 {
+  width: 280px;
+  height: 280px;
+  background: rgba(59, 126, 248, 0.03);
+  top: 40%;
+  left: 40%;
+  animation: mesh-float-3 16s ease-in-out infinite;
+}
+
+.hero-float {
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
