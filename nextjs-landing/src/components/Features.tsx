@@ -60,7 +60,8 @@ export default function Features() {
           </div>
 
           {/* Recruit Hacker */}
-          <div className="bg-white rounded-[20px] p-6 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="bg-white rounded-[20px] p-6 transition-all relative opacity-75">
+            <span className="absolute top-4 right-4 bg-t3 text-white text-[10px] font-bold py-0.5 px-2.5 rounded-full tracking-wide">СКОРО</span>
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-blue-l text-blue flex-shrink-0">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
@@ -73,7 +74,8 @@ export default function Features() {
           </div>
 
           {/* Cover Letter */}
-          <div className="bg-white rounded-[20px] p-6 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          <div className="bg-white rounded-[20px] p-6 transition-all relative opacity-75">
+            <span className="absolute top-4 right-4 bg-t3 text-white text-[10px] font-bold py-0.5 px-2.5 rounded-full tracking-wide">СКОРО</span>
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-blue-l text-blue flex-shrink-0">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
@@ -99,7 +101,8 @@ export default function Features() {
           </div>
 
           {/* Vacancies with Match */}
-          <div className="bg-white rounded-[20px] p-6 transition-all border-[1.5px] border-blue-m shadow-[0_4px_20px_rgba(59,126,248,0.1)] hover:border-blue hover:shadow-[0_8px_28px_rgba(59,126,248,0.16)] hover:-translate-y-0.5">
+          <div className="bg-white rounded-[20px] p-6 transition-all relative opacity-75">
+            <span className="absolute top-4 right-4 bg-t3 text-white text-[10px] font-bold py-0.5 px-2.5 rounded-full tracking-wide">СКОРО</span>
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-blue-l text-blue flex-shrink-0">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />

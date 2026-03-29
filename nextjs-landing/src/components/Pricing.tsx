@@ -9,7 +9,7 @@ export default function Pricing() {
           Начни бесплатно
         </h2>
         <p className="text-[15px] text-t2 leading-relaxed max-w-[520px] mx-auto mb-10 md:mb-14 font-normal">
-          Никаких скрытых списаний. Месячная подписка, отмена в&nbsp;любой момент.
+          Простой старт в&nbsp;Telegram-боте
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
@@ -24,13 +24,13 @@ export default function Pricing() {
               <div className="text-[40px] font-extrabold leading-none mb-1 tracking-tight text-blue">
                 Бесплатно
               </div>
-              <div className="text-[12.5px] text-t3 mb-6 font-normal">2 генерации · карта не&nbsp;нужна</div>
+              <div className="text-[12.5px] text-t3 mb-6 font-normal">2 бесплатные генерации</div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature>2 полных цикла: анализ + улучшение резюме + сопроводительное</PricingFeature>
+                <PricingFeature>Анализ резюме относительно вакансии</PricingFeature>
+                <PricingFeature>Адаптация резюме под конкретную позицию</PricingFeature>
                 <PricingFeature>Подробный match-отчёт</PricingFeature>
-                <PricingFeature>Скачать резюме в&nbsp;PDF / DOCX</PricingFeature>
-                <PricingFeature>Без регистрации — прямо в&nbsp;Telegram</PricingFeature>
+                <PricingFeature>Простой старт в&nbsp;Telegram-боте</PricingFeature>
               </ul>
 
               <a
