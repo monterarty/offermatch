@@ -59,17 +59,16 @@ export default function Features() {
             </div>
           </div>
 
-          {/* Recruit Hacker */}
-          <div className="bg-white rounded-[20px] p-6 transition-all relative opacity-75">
-            <span className="absolute top-4 right-4 bg-t3 text-white text-[10px] font-bold py-0.5 px-2.5 rounded-full tracking-wide">СКОРО</span>
+          {/* Templates */}
+          <div className="bg-white rounded-[20px] p-6 transition-all hover:-translate-y-0.5 hover:shadow-md">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-blue-l text-blue flex-shrink-0">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
               </svg>
             </div>
-            <div className="text-[15px] font-bold mb-2 text-navy tracking-tight">Рекрут-хакер</div>
+            <div className="text-[15px] font-bold mb-2 text-navy tracking-tight">Шаблоны и экспорт</div>
             <div className="text-[13px] text-t2 leading-relaxed font-normal">
-              Сервис задаёт точечные вопросы и дополняет резюме вашими реальными ответами — без выдуманных фактов.
+              Скачивайте резюме в формате PDF, DOCX или TXT. Храните несколько версий под разные вакансии.
             </div>
           </div>
 
@@ -87,16 +86,17 @@ export default function Features() {
             </div>
           </div>
 
-          {/* Templates */}
-          <div className="bg-white rounded-[20px] p-6 transition-all hover:-translate-y-0.5 hover:shadow-md">
+          {/* Recruit Hacker */}
+          <div className="bg-white rounded-[20px] p-6 transition-all relative opacity-75">
+            <span className="absolute top-4 right-4 bg-t3 text-white text-[10px] font-bold py-0.5 px-2.5 rounded-full tracking-wide">СКОРО</span>
             <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 bg-blue-l text-blue flex-shrink-0">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
               </svg>
             </div>
-            <div className="text-[15px] font-bold mb-2 text-navy tracking-tight">Шаблоны и экспорт</div>
+            <div className="text-[15px] font-bold mb-2 text-navy tracking-tight">Рекрут-хакер</div>
             <div className="text-[13px] text-t2 leading-relaxed font-normal">
-              Скачивайте резюме в формате PDF, DOCX или TXT. Храните несколько версий под разные вакансии.
+              Сервис задаёт точечные вопросы и дополняет резюме вашими реальными ответами — без выдуманных фактов.
             </div>
           </div>
 
