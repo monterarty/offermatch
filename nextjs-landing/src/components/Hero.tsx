@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-20 text-center bg-[linear-gradient(180deg,#3E80F8_0%,#6B9FFA_35%,#A8C8FC_55%,#D6E4FD_70%,#EDF1FB_82%,#F6F7FB_92%)] relative overflow-hidden">
+    <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-20 text-center bg-[linear-gradient(180deg,#3E80F8_0%,#6B9FFA_45%,#A8C8FC_65%,#D6E4FD_78%,#EDF1FB_88%,#F6F7FB_96%)] relative overflow-hidden">
       {/* Floating logos - hidden on mobile */}
       <div className="hidden lg:block hero-float absolute top-20 left-[6%] z-[1]" style={{ animationDelay: "0s" }}>
         <img src="/logos/ozon.png" alt="" className="w-[72px] h-[72px] object-contain opacity-85" />
@@ -45,7 +45,7 @@ export default function Hero() {
         </h1>
 
         {/* Subheading */}
-        <p className="text-base md:text-[17px] text-white/95 leading-relaxed max-w-[480px] mx-auto mb-10 md:mb-12 font-normal px-4 drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]">
+        <p className="text-base md:text-[17px] text-white/95 leading-snug max-w-[480px] mx-auto mb-10 md:mb-12 font-normal px-4">
           Отправь резюме и&nbsp;вакансию боту&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.
         </p>
 
