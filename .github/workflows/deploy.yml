@@ -1,0 +1,44 @@
+name: Deploy OfferMatch Landing
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Prepare server directory
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            mkdir -p ~/offermatch
+          "
+
+      - name: Deploy files to server
+        run: |
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.idea' \
+            --exclude='*.md' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/offermatch/
+
+      - name: Verify deployment
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+            ls -la ~/offermatch/ &&
+            echo 'Deployment successful!'
+          "
