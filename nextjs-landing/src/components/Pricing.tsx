@@ -20,11 +20,11 @@ export default function Pricing() {
             </div>
             <div className="flex-1 flex flex-col">
               <div className="text-base font-bold mb-1 text-navy">Старт</div>
-              <div className="text-[12.5px] text-t3 mb-5 font-normal">Попробуй без риска</div>
+              <div className="text-[12.5px] text-t3 mb-5 font-normal">Попробуй</div>
               <div className="text-[40px] font-extrabold leading-none mb-1 tracking-tight text-blue">
                 Бесплатно
               </div>
-              <div className="text-[12.5px] text-t3 mb-6 font-normal">2 бесплатные генерации</div>
+              <div className="text-[12.5px] text-t3 mb-6 font-normal">1 бесплатная генерация</div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
                 <PricingFeature>Анализ резюме относительно вакансии</PricingFeature>
