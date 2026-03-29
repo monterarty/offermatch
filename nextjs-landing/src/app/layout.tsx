@@ -13,6 +13,17 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  openGraph: {
+    title: "OfferMatch — Умная адаптация резюме",
+    description: "Отправь резюме и вакансию боту — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
+    images: [{ url: "/og-image.png" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "OfferMatch — Умная адаптация резюме",
+    description: "Отправь резюме и вакансию боту — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
