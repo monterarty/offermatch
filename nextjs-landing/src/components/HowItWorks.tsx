@@ -40,7 +40,7 @@ export default function HowItWorks() {
               className="bg-white rounded-[20px] p-6 md:p-8 transition-all relative overflow-hidden group hover:-translate-y-1 hover:shadow-md flex flex-col"
             >
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-blue opacity-0 transition-opacity group-hover:opacity-100" />
-              <div className="text-[56px] font-extrabold text-blue opacity-[0.07] leading-none mb-5 tracking-[-2px]">
+              <div className="text-[56px] font-extrabold text-blue opacity-[0.15] leading-none mb-5 tracking-[-2px]">
                 {step.num}
               </div>
               <div className="text-[17px] font-bold mb-2.5 text-navy tracking-tight">
