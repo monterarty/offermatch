@@ -44,26 +44,28 @@ export default function Pricing() {
             </div>
           </div>
 
-          {/* Pro */}
-          <div className="bg-white border-[1.5px] border-[#D4E4FF] rounded-[28px] p-6 md:p-8 relative transition-all flex flex-col">
+          {/* Week */}
+          <div className="bg-white border-[1.5px] border-[#D4E4FF] rounded-[28px] p-6 md:p-8 relative transition-all flex flex-col hover:-translate-y-1 hover:border-blue-side hover:shadow-md">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-t3 text-white text-[10px] font-bold py-1 px-3.5 rounded-full whitespace-nowrap tracking-wide">
               СКОРО
             </div>
             <div className="flex-1 flex flex-col">
-              <div className="text-base font-bold mb-1 text-navy">Профи</div>
-              <div className="text-[12.5px] text-t3 mb-5 font-normal">Неделя активного поиска</div>
+              <div className="text-base font-bold mb-1 text-navy">Неделя</div>
+              <div className="text-[12.5px] text-t3 mb-5 font-normal">10 качественных откликов</div>
               <div className="text-[40px] font-extrabold leading-none mb-1 tracking-tight text-[#76A5FA]">
                 399 ₽
               </div>
-              <div className="text-[12.5px] text-t3 mb-6 font-normal">за 7 дней · без автопродления</div>
+              <div className="text-[12.5px] text-t3 mb-6 font-normal">без автопродления · доступ 7 дней</div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature side>Безлимитный анализ и&nbsp;адаптация резюме</PricingFeature>
-                <PricingFeature side>Безлимитные сопроводительные письма</PricingFeature>
-                <PricingFeature side>Детальный отчёт с&nbsp;графиками</PricingFeature>
-                <PricingFeature side>Лента вакансий — свайп и&nbsp;мгновенная адаптация</PricingFeature>
-                <PricingFeature side>Трекер откликов без лимитов</PricingFeature>
+                <PricingFeature side>Анализ резюме по&nbsp;8 критериям — 10&nbsp;раз</PricingFeature>
+                <PricingFeature side>Адаптация резюме под вакансию</PricingFeature>
+                <PricingFeature side>Интервью с&nbsp;ИИ-ассистентом</PricingFeature>
+                <PricingFeature side>Сопроводительные письма — 10&nbsp;генераций</PricingFeature>
+                <PricingFeature side>Мэтч-механика — подбор вакансий + свайп</PricingFeature>
               </ul>
+
+              <div className="text-[12px] text-t3 font-medium text-center mb-3">39 ₽ / отклик</div>
 
               <button
                 disabled
@@ -74,25 +76,28 @@ export default function Pricing() {
             </div>
           </div>
 
-          {/* Career / Monthly */}
-          <div className="bg-white border-[1.5px] border-[#D4E4FF] rounded-[28px] p-6 md:p-8 relative transition-all flex flex-col">
+          {/* Month */}
+          <div className="bg-white border-[1.5px] border-[#D4E4FF] rounded-[28px] p-6 md:p-8 relative transition-all flex flex-col hover:-translate-y-1 hover:border-blue-side hover:shadow-md">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-t3 text-white text-[10px] font-bold py-1 px-3.5 rounded-full whitespace-nowrap tracking-wide">
               СКОРО
             </div>
             <div className="flex-1 flex flex-col">
-              <div className="text-base font-bold mb-1 text-navy">Карьерный</div>
-              <div className="text-[12.5px] text-t3 mb-5 font-normal">Месяц без ограничений</div>
+              <div className="text-base font-bold mb-1 text-navy">Месяц</div>
+              <div className="text-[12.5px] text-t3 mb-5 font-normal">40 качественных откликов</div>
               <div className="text-[40px] font-extrabold leading-none mb-1 tracking-tight text-[#76A5FA]">
-                999 ₽
+                1 190 ₽
               </div>
-              <div className="text-[12.5px] text-t3 mb-6 font-normal">в&nbsp;месяц · отмена в&nbsp;любой момент</div>
+              <div className="text-[12.5px] text-t3 mb-6 font-normal">без автопродления · доступ 30 дней · <span className="text-green font-semibold">−25%</span></div>
 
               <ul className="list-none flex flex-col gap-2.5 mb-6 flex-1">
-                <PricingFeature side>Всё из&nbsp;«Профи» — без ограничений по&nbsp;времени</PricingFeature>
-                <PricingFeature side>Симулятор собеседования с&nbsp;ИИ</PricingFeature>
-                <PricingFeature side>2 консультации с&nbsp;карьерным экспертом</PricingFeature>
-                <PricingFeature side>Карьерная аналитика и&nbsp;приоритетная поддержка</PricingFeature>
+                <PricingFeature side>Анализ резюме по&nbsp;8 критериям — 40&nbsp;раз</PricingFeature>
+                <PricingFeature side>Адаптация резюме под вакансию</PricingFeature>
+                <PricingFeature side>Интервью с&nbsp;ИИ-ассистентом</PricingFeature>
+                <PricingFeature side>Сопроводительные письма — 40&nbsp;генераций</PricingFeature>
+                <PricingFeature side>Мэтч-механика — подбор вакансий + свайп</PricingFeature>
               </ul>
+
+              <div className="text-[12px] text-t3 font-medium text-center mb-3">29 ₽ / отклик</div>
 
               <button
                 disabled
