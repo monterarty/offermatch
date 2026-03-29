@@ -1,3 +1,5 @@
+import { BotLinkButton } from "./BotLink";
+
 export default function Hero() {
   return (
     <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-20 text-center bg-[linear-gradient(180deg,#3E80F8_0%,#6B9FFA_45%,#A8C8FC_65%,#D6E4FD_78%,#EDF1FB_88%,#F6F7FB_96%)] relative overflow-hidden">
@@ -50,17 +52,15 @@ export default function Hero() {
         </p>
 
         {/* CTA Button */}
-        <a
-          href="https://t.me/OfferMatch_resume_helper_bot?start=site_hero"
-          target="_blank"
-          rel="noopener noreferrer"
+        <BotLinkButton
+          section="site_hero"
           className="inline-flex items-center gap-2.5 px-9 py-4 bg-white text-blue rounded-2xl text-[17px] font-bold tracking-tight no-underline transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.3)]"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.8 8.5c-.13.6-.5.75-.99.47l-2.75-2.03-1.33 1.27c-.15.15-.27.27-.55.27l.2-2.8 5.1-4.6c.22-.2-.05-.3-.34-.13l-6.31 3.97-2.72-.85c-.59-.18-.6-.59.12-.88l10.64-4.1c.5-.18.93.12.77.88z" />
           </svg>
           Попробовать бесплатно
-        </a>
+        </BotLinkButton>
       </div>
 
       {/* Social Proof */}

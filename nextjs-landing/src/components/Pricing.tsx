@@ -1,3 +1,5 @@
+import { BotLinkButton } from "./BotLink";
+
 export default function Pricing() {
   return (
     <section id="pricing" className="py-16 md:py-24 px-4 md:px-6 bg-bg">
@@ -33,14 +35,12 @@ export default function Pricing() {
                 <PricingFeature>Простой старт в&nbsp;Telegram-боте</PricingFeature>
               </ul>
 
-              <a
-                href="https://t.me/OfferMatch_resume_helper_bot?start=site_pricing"
-                target="_blank"
-                rel="noopener noreferrer"
+              <BotLinkButton
+                section="site_pricing"
                 className="w-full py-3 px-4 rounded-xl text-[13.5px] font-semibold cursor-pointer transition-all border-[1.5px] border-blue bg-blue text-white mt-auto text-center no-underline block hover:-translate-y-0.5 hover:bg-blue-d"
               >
                 Попробовать бесплатно
-              </a>
+              </BotLinkButton>
             </div>
           </div>
 

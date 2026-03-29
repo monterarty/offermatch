@@ -70,3 +70,55 @@ CI/CD pipeline (`.github/workflows/deploy.yml`) автоматически:
 - **Next.js код** — продакшен, коммитить только проверенное
 - **Ветка main** — деплоится автоматически, пушить только рабочий код
 - Перед портированием в Next.js: прочитать `nextjs-landing/AGENTS.md` (Next 16 имеет breaking changes)
+
+## Аналитика и трекинг
+
+### Яндекс.Метрика
+
+- **ID счётчика:** 108295793
+- **Код:** `nextjs-landing/src/app/layout.tsx` (inline script в `<head>`)
+- **Возможности:** webvisor, clickmap, accurateTrackBounce, trackLinks
+- **UTM-метки:** автоматически читаются Метрикой из URL
+
+### UTM → Telegram-бот (deep linking)
+
+Все кнопки "Попробовать бесплатно" ведут на бот через `BotLinkButton` компонент (`src/components/BotLink.tsx`).
+
+Логика формирования ссылки (`src/lib/botLink.ts`):
+
+```
+Вход:  offermatch.ru/?utm_source=vc&utm_campaign=launch
+Клик:  "Попробовать бесплатно" в hero
+Выход: t.me/OfferMatch_resume_helper_bot?start=site_hero_vc_launch
+```
+
+**Формат `?start=` параметра:** `{section}_{utm_source}_{utm_campaign}`
+
+Части опциональны — если UTM нет, передаётся только section.
+
+### Секции (section)
+
+| Кнопка | section | Что видит бот |
+|---|---|---|
+| Навбар CTA | `site_nav` | `/start site_nav` |
+| Hero CTA | `site_hero` | `/start site_hero` |
+| Тариф "Старт" | `site_pricing` | `/start site_pricing` |
+
+### Готовые ссылки для публикаций
+
+Шаблон: `https://offermatch.ru/?utm_source={площадка}&utm_medium=article&utm_campaign={название}`
+
+| Площадка | Пример ссылки |
+|---|---|
+| VC.ru | `https://offermatch.ru/?utm_source=vc&utm_medium=article&utm_campaign=launch` |
+| Habr | `https://offermatch.ru/?utm_source=habr&utm_medium=article&utm_campaign=launch` |
+| Telegram-канал | `https://offermatch.ru/?utm_source=tg&utm_medium=post&utm_campaign=launch` |
+| VK | `https://offermatch.ru/?utm_source=vk&utm_medium=post&utm_campaign=launch` |
+| Прямая в бот | `https://t.me/OfferMatch_resume_helper_bot?start=direct_{площадка}` |
+
+### Что нужно в боте (для разработчика бота)
+
+В хендлере `/start` парсить параметр: `message.text.split(' ')[1]`. Сохранять в базу:
+- `user_id` — Telegram user ID
+- `source` — значение параметра (например `site_hero_vc_launch`)
+- `timestamp` — время перехода
