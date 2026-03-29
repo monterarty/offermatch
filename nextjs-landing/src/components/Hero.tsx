@@ -1,8 +1,6 @@
-import Widget from "./Widget";
-
 export default function Hero() {
   return (
-    <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-20 text-center bg-gradient-to-b from-[#3E80F8] via-[#6B9FFA] to-bg relative overflow-hidden">
+    <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-4 md:px-6 py-16 md:py-20 text-center bg-[linear-gradient(180deg,#3E80F8_0%,#6B9FFA_35%,#A8C8FC_55%,#D6E4FD_70%,#EDF1FB_82%,#F6F7FB_92%)] relative overflow-hidden">
       {/* Floating logos - hidden on mobile */}
       <div className="hidden lg:block hero-float absolute top-20 left-[6%] z-[1]" style={{ animationDelay: "0s" }}>
         <img src="/logos/ozon.png" alt="" className="w-[72px] h-[72px] object-contain opacity-85" />
@@ -48,15 +46,25 @@ export default function Hero() {
 
         {/* Subheading */}
         <p className="text-base md:text-[17px] text-white/80 leading-relaxed max-w-[480px] mx-auto mb-10 md:mb-12 font-normal px-4">
-          Загрузи резюме и&nbsp;вакансию&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.
+          Отправь резюме и&nbsp;вакансию боту&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.
         </p>
+
+        {/* CTA Button */}
+        <a
+          href="https://t.me/OfferMatch_resume_helper_bot?start=site_hero"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 px-9 py-4 bg-white text-blue rounded-2xl text-[17px] font-bold tracking-tight no-underline transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(255,255,255,0.3)]"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.8 8.5c-.13.6-.5.75-.99.47l-2.75-2.03-1.33 1.27c-.15.15-.27.27-.55.27l.2-2.8 5.1-4.6c.22-.2-.05-.3-.34-.13l-6.31 3.97-2.72-.85c-.59-.18-.6-.59.12-.88l10.64-4.1c.5-.18.93.12.77.88z" />
+          </svg>
+          Попробовать бесплатно
+        </a>
       </div>
 
-      {/* Widget */}
-      <Widget />
-
       {/* Social Proof */}
-      <div className="relative z-[5] mt-7 text-[12.5px] text-t3 flex items-center gap-2.5 font-normal">
+      <div className="relative z-[5] mt-12 text-[12.5px] text-t3 flex items-center gap-2.5 font-normal">
         <div className="flex">
           {[
             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=56&h=56&fit=crop&crop=face",

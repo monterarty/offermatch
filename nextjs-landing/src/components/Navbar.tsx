@@ -7,9 +7,8 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center px-4 md:px-8 gap-4 md:gap-5 border-b border-border bg-[rgba(246,247,251,0.95)] backdrop-blur-[16px]">
-      <a href="#" className="flex items-center gap-2 text-lg font-bold text-navy tracking-tight no-underline">
-        <div className="w-2 h-2 rounded-full bg-blue flex-shrink-0" />
-        OfferMatch
+      <a href="#" className="flex items-center no-underline">
+        <img src="/logos/offer_match_2.png" alt="OfferMatch" className="h-6 w-auto" />
       </a>
 
       {/* Desktop nav links */}
@@ -35,16 +34,15 @@ export default function Navbar() {
       </div>
 
       <div className="ml-auto flex items-center gap-2">
-        <button className="hidden sm:block px-4 py-[7px] text-[13.5px] font-medium text-navy3 bg-transparent border border-border2 cursor-pointer rounded-lg transition-all leading-none hover:border-navy3 hover:text-navy">
-          Войти
-        </button>
-        <button
-          onClick={() => scrollTo("widget")}
-          className="px-4 md:px-5 py-2 text-[13.5px] font-semibold text-white bg-blue border-none cursor-pointer rounded-lg transition-all leading-none hover:bg-blue-d hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,126,248,0.32)]"
+        <a
+          href="https://t.me/OfferMatch_resume_helper_bot?start=site_nav"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-4 md:px-5 py-2 text-[13.5px] font-semibold text-white bg-blue border-none cursor-pointer rounded-lg transition-all leading-none no-underline hover:bg-blue-d hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(59,126,248,0.32)]"
         >
           <span className="hidden sm:inline">Попробовать бесплатно</span>
           <span className="sm:hidden">Начать</span>
-        </button>
+        </a>
       </div>
     </nav>
   );

@@ -94,7 +94,7 @@ nav{
   min-height:calc(100vh - 60px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:72px 24px 80px;text-align:center;
-  background:linear-gradient(180deg, #3E80F8 0%, #6B9FFA 40%, #F6F7FB 75%);
+  background:linear-gradient(180deg, #3E80F8 0%, #6B9FFA 35%, #A8C8FC 55%, #D6E4FD 70%, #EDF1FB 82%, #F6F7FB 92%);
   position:relative;overflow:hidden;
 }
 .hero>*:not(.hero-logo):not(.hero-chip){position:relative;z-index:5}
@@ -121,109 +121,24 @@ nav{
 .hero-chip{position:absolute;z-index:1;border-radius:100px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);padding:8px 16px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;animation:hfloat 6s ease-in-out infinite;box-shadow:0 4px 16px rgba(0,0,0,.06)}
 @keyframes hfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* ── WIDGET ── */
-.widget{
-  width:100%;max-width:900px;
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:var(--r28);
-  box-shadow:var(--shadow-lg);
-  overflow:hidden;
+/* ── Hero CTA ── */
+.hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px}
+.btn-hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;
+  background:var(--white);color:var(--blue);
+  border-radius:var(--r16);
+  font-family:'Inter',sans-serif;font-size:17px;font-weight:700;
+  text-decoration:none;letter-spacing:-.3px;
+  transition:all .22s;
+  border:none;
 }
-.w-top{padding:24px 28px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
-.w-title{font-size:20px;font-weight:700;letter-spacing:-.4px;color:var(--navy);margin-bottom:4px;text-align:left}
-.w-sub{font-size:13px;color:var(--t2);font-weight:400;text-align:left}
-.w-steps{display:flex;align-items:center;gap:6px;flex-shrink:0;margin-top:4px}
-.ws{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t3);font-weight:400}
-.ws.on{color:var(--navy);font-weight:600}
-.wsn{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--t3)}
-.ws.on .wsn{background:var(--blue);border-color:var(--blue);color:#fff}
-.wsdiv{width:20px;height:1px;background:var(--border)}
-
-.w-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 28px}
-.panel{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r20);overflow:hidden;transition:border-color .2s}
-.panel:focus-within{border-color:var(--blue)}
-.panel.filled{border-color:var(--green);background:rgba(22,163,74,.02)}
-.p-hd{padding:14px 16px 0;display:flex;align-items:center;justify-content:space-between}
-.p-label{font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px}
-.ptag{font-size:10px;font-weight:600;letter-spacing:.3px;padding:2px 8px;border-radius:100px;border:1px solid var(--blue-m)}
-.ptag-b{background:var(--blue-l);color:var(--blue);border-color:var(--blue-m)}
-.ptag-m{background:var(--blue-l);color:var(--blue);border-color:var(--blue-m)}
-.ptag-new{background:var(--blue-l);color:var(--blue);border-color:var(--blue-m)}
-
-.ptabs{display:flex;gap:2px;padding:10px 14px 0}
-.ptab{padding:6px 12px;font-size:12px;font-weight:500;border-radius:var(--r8);cursor:pointer;border:none;background:none;color:var(--t3);font-family:var(--ffb);transition:all .18s}
-.ptab:hover{color:var(--navy);background:var(--surface2)}
-.ptab.on{background:var(--white);color:var(--navy);box-shadow:var(--shadow-sm);border:1px solid var(--border)}
-
-.p-bd{padding:12px 14px 16px}
-
-/* ── Dropzone ── */
-.dz{border:1.5px dashed var(--border2);border-radius:var(--r16);padding:36px 20px;text-align:center;cursor:pointer;transition:all .22s}
-.dz:hover{border-color:var(--blue);background:var(--blue-l)}
-.dz-ico{
-  width:44px;height:44px;
-  background:var(--surface2);border:1px solid var(--border);border-radius:var(--r12);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 12px;transition:all .22s;color:var(--t3);
-}
-.dz:hover .dz-ico{transform:translateY(-3px);background:var(--blue-l);border-color:var(--blue-m);color:var(--blue)}
-.dz-t{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:4px}
-.dz-s{font-size:11px;color:var(--t3)}
-.dz-link{color:var(--blue);font-weight:500}
-.dz-fmt{font-size:10px;color:var(--t4);margin-top:6px}
-
-/* ── Loaded file card ── */
-.fc{display:flex;align-items:center;gap:10px;background:var(--green-l);border:1px solid var(--green-m);border-radius:var(--r12);padding:11px 13px}
-.fc-ico{width:20px;height:20px;color:var(--green);flex-shrink:0}
-.fc-name{font-size:12px;font-weight:500;color:var(--navy);flex:1}
-.fc-size{font-size:11px;color:var(--t3)}
-.fc-rm{background:none;border:none;color:var(--t3);cursor:pointer;display:flex;align-items:center;padding:2px;transition:color .18s;border-radius:4px}
-.fc-rm:hover{color:var(--coral)}
-
-/* ── Vacancy inputs ── */
-.vta-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r12);padding:12px 14px;transition:border-color .2s}
-.vta-wrap:focus-within{border-color:var(--blue)}
-.vta{width:100%;min-height:130px;background:transparent;border:none;outline:none;resize:none;font-family:var(--ffb);font-size:13px;color:var(--navy);line-height:1.65;font-weight:400}
-.vta::placeholder{color:var(--t4)}
-.vta-foot{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 0;font-size:11px;color:var(--t3)}
-
-.url-row{display:flex;gap:8px;margin-bottom:10px}
-.url-inp{flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r12);padding:10px 13px;font-family:var(--ffb);font-size:13px;color:var(--navy);outline:none;transition:border-color .2s}
-.url-inp:focus{border-color:var(--blue)}
-.url-inp::placeholder{color:var(--t4)}
-.btn-fetch{padding:0 16px;background:var(--navy);border:none;border-radius:var(--r12);font-family:var(--ffb);font-size:12px;font-weight:600;color:#fff;cursor:pointer;transition:all .18s;white-space:nowrap;min-height:42px}
-.btn-fetch:hover{background:var(--blue)}
-.parsed-ok{display:inline-flex;align-items:center;gap:6px;background:var(--green-l);border:1px solid var(--green-m);border-radius:100px;padding:3px 10px;font-size:11px;color:var(--green);margin-bottom:8px;font-weight:600}
-
-/* ── Widget footer ── */
-.w-foot{padding:16px 28px 24px;display:flex;align-items:center;gap:20px;border-top:1px solid var(--border);background:var(--bg)}
-.wf-info{flex:1}
-.wf-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px;text-align:left}
-.wf-sub{font-size:11px;color:var(--t3);font-weight:400;text-align:left}
-.wf-dots{display:flex;align-items:center;gap:16px}
-.wf-di{display:flex;align-items:center;gap:6px;font-size:12px}
-.wf-dot{width:7px;height:7px;border-radius:50%;transition:all .3s;flex-shrink:0}
-.wf-dot.on{background:var(--green)}
-.wf-dot.off{background:var(--border2)}
-.wf-lbl{font-weight:400;transition:color .3s}
-.wf-lbl.on{color:var(--navy2)}
-.wf-lbl.off{color:var(--t3)}
-
-.btn-analyze{
-  padding:13px 28px;
-  background:var(--blue);
-  color:#fff;border:none;border-radius:var(--r16);
-  font-family:var(--ffd);font-size:15px;font-weight:600;
-  cursor:pointer;letter-spacing:-.3px;white-space:nowrap;
-  transition:all .22s;box-shadow:var(--shadow-blue);
-  display:flex;align-items:center;gap:8px;
-}
-.btn-analyze:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,126,248,.36);background:var(--blue-d)}
-.btn-analyze:disabled{background:var(--border2);color:var(--t3);box-shadow:none;cursor:not-allowed;transform:none}
+.btn-hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,255,255,.3)}
+.btn-hero-cta svg{flex-shrink:0}
+.hero-cta-note{font-size:13px;color:rgba(255,255,255,.7);font-weight:400}
 
 /* ── Proof ── */
-.hero-proof{margin-top:28px;font-size:12.5px;color:var(--t3);display:flex;align-items:center;gap:10px;font-weight:400}
+.hero-proof{margin-top:48px;font-size:12.5px;color:var(--t3);display:flex;align-items:center;gap:10px;font-weight:400}
 .proof-avs{display:flex}
 .pav{
   width:28px;height:28px;border-radius:50%;border:2px solid var(--white);
@@ -312,6 +227,7 @@ nav{
   background:var(--blue);color:#fff;font-size:10px;font-weight:700;
   padding:4px 14px;border-radius:100px;white-space:nowrap;letter-spacing:.5px;
 }
+.pc-badge-soon{background:var(--t3)}
 .pc-name{font-size:16px;font-weight:700;margin-bottom:4px;color:var(--navy)}
 .pc-tagline{font-size:12.5px;color:var(--t3);margin-bottom:20px;font-weight:400}
 .pc-price{font-size:40px;font-weight:800;line-height:1;margin-bottom:4px;color:var(--navy);letter-spacing:-1.5px}
@@ -331,6 +247,7 @@ nav{
 }
 .bpc-ghost{background:none;border-color:#C5D9FF;color:var(--navy3)}
 .bpc-ghost:hover{border-color:var(--blue-side);color:var(--navy)}
+.bpc-ghost:disabled{background:var(--bg2);border-color:var(--border);color:var(--t3);cursor:not-allowed;transform:none}
 .bpc-main{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:var(--shadow-blue)}
 .bpc-main:hover{background:var(--blue-d);transform:translateY(-1px)}
 
@@ -397,7 +314,7 @@ footer{border-top:1px solid var(--border);padding:64px 24px 40px;background:var(
   </div>
   <div class="nav-r">
     <button class="btn-ghost" onclick="location.href='05-light-dashboard.html'">Войти</button>
-    <button class="btn-cta" onclick="document.getElementById('widget').scrollIntoView({behavior:'smooth'})">Попробовать бесплатно</button>
+    <button class="btn-cta" onclick="window.open('https://t.me/OfferMatch_resume_helper_bot?start=site_nav','_blank')">Попробовать бесплатно</button>
   </div>
 </nav>
 
@@ -433,117 +350,13 @@ footer{border-top:1px solid var(--border);padding:64px 24px 40px;background:var(
   </div>
 
   <h1>Получи работу,<br><span class="grad-blue">которую хочешь</span></h1>
-  <p class="hero-sub">Загрузи резюме и&nbsp;вакансию&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.</p>
+  <p class="hero-sub">Отправь резюме и&nbsp;вакансию боту&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.</p>
 
-  <!-- WIDGET -->
-  <div class="widget" id="widget">
-    <div class="w-top">
-      <div>
-        <div class="w-title">Загрузи вакансию</div>
-        <div class="w-sub">Выбери резюме&nbsp;— мы&nbsp;проверим соответствие и&nbsp;поможем повысить шансы</div>
-      </div>
-      <div class="w-steps">
-        <div class="ws on"><div class="wsn">1</div><span>Загрузка</span></div>
-        <div class="wsdiv"></div>
-        <div class="ws"><div class="wsn">2</div><span>Анализ</span></div>
-        <div class="wsdiv"></div>
-        <div class="ws"><div class="wsn">3</div><span>Результат</span></div>
-      </div>
-    </div>
-
-    <div class="w-panels">
-      <!-- Resume panel -->
-      <div class="panel" id="p-res">
-        <div class="p-hd"><div class="p-label">Резюме <span class="ptag ptag-b">Шаг 1</span></div></div>
-        <div class="ptabs">
-          <button class="ptab on" id="rt-file" onclick="rTab('file')">Файл</button>
-          <button class="ptab" id="rt-text" onclick="rTab('text')">Текст</button>
-        </div>
-        <div class="p-bd">
-          <div id="rp-file">
-            <div class="dz" id="dz-r" onclick="loadResume()">
-              <div class="dz-ico">
-                <!-- Upload icon -->
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-              </div>
-              <div class="dz-t">Перетащите файл или <span class="dz-link">выберите</span></div>
-              <div class="dz-s">PDF, DOC, DOCX</div>
-              <div class="dz-fmt">до 10 МБ</div>
-            </div>
-            <div class="fc" id="fc-r" style="display:none">
-              <div class="fc-ico">
-                <!-- File icon -->
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                </svg>
-              </div>
-              <div class="fc-name">Резюме_Иванова_Анна.pdf</div>
-              <div class="fc-size">342 КБ</div>
-              <button class="fc-rm" onclick="clearResume()">
-                <!-- Close icon -->
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div id="rp-text" style="display:none">
-            <div class="vta-wrap"><textarea class="vta" style="min-height:150px" placeholder="Вставьте текст резюме..."></textarea></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vacancy panel -->
-      <div class="panel" id="p-vac">
-        <div class="p-hd"><div class="p-label">Вакансия <span class="ptag ptag-b">Шаг 2</span></div></div>
-        <div class="ptabs">
-          <button class="ptab on" id="vt-text" onclick="vTab('text')">Текст</button>
-          <button class="ptab" id="vt-url" onclick="vTab('url')">По ссылке</button>
-        </div>
-        <div class="p-bd">
-          <div id="vp-text">
-            <div class="parsed-ok" id="parsed-ok" style="display:none">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Загружено автоматически
-            </div>
-            <div class="vta-wrap">
-              <textarea class="vta" id="vac-ta" placeholder="Вставьте текст вакансии...&#10;&#10;Например: «Ищем Data Analyst с опытом&#10;Python, SQL, Power BI...»" oninput="onVac()"></textarea>
-            </div>
-            <div class="vta-foot"><span id="vac-cnt">0 символов</span></div>
-          </div>
-          <div id="vp-url" style="display:none">
-            <div class="url-row">
-              <input class="url-inp" id="url-inp" type="url" placeholder="https://hh.ru/vacancy/12345678">
-              <button class="btn-fetch" onclick="doFetch()">Загрузить</button>
-            </div>
-            <div style="font-size:11px;color:var(--t3)">hh.ru · SuperJob · Работа.ру</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Widget footer -->
-    <div class="w-foot">
-      <div class="wf-info">
-        <div class="wf-title">Готовность к анализу</div>
-        <div class="wf-sub">Заполните оба поля для&nbsp;проверки соответствия</div>
-      </div>
-      <div class="wf-dots">
-        <div class="wf-di"><div class="wf-dot off" id="wd-r"></div><span class="wf-lbl off" id="wl-r">Резюме</span></div>
-        <div class="wf-di"><div class="wf-dot off" id="wd-v"></div><span class="wf-lbl off" id="wl-v">Вакансия</span></div>
-      </div>
-      <button class="btn-analyze" id="btn-go" disabled onclick="location.href='02-light-loading.html'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-          <path d="M12 1l2.59 7.76L22 12l-7.41 3.24L12 23l-2.59-7.76L2 12l7.41-3.24L12 1z"/><path d="M21 14l1.32 3.96L26 19.5l-3.68 1.54L21 25l-1.32-3.96L16 19.5l3.68-1.54L21 14z"/>
-        </svg>
-        Анализировать резюме
-      </button>
-    </div>
+  <div class="hero-cta-wrap">
+    <a class="btn-hero-cta" href="https://t.me/OfferMatch_resume_helper_bot?start=site_hero" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.8 8.5c-.13.6-.5.75-.99.47l-2.75-2.03-1.33 1.27c-.15.15-.27.27-.55.27l.2-2.8 5.1-4.6c.22-.2-.05-.3-.34-.13l-6.31 3.97-2.72-.85c-.59-.18-.6-.59.12-.88l10.64-4.1c.5-.18.93.12.77.88z"/></svg>
+      Попробовать бесплатно
+    </a>
   </div>
 
   <!-- Proof -->
@@ -569,8 +382,8 @@ footer{border-top:1px solid var(--border);padding:64px 24px 40px;background:var(
     <div class="how-grid">
       <div class="how-card">
         <div class="how-num">01</div>
-        <div class="how-title">Загрузи резюме и вакансию</div>
-        <div class="how-desc">Добавь файл, текст или&nbsp;ссылку&nbsp;— сервис сам всё распознает и&nbsp;подготовит к&nbsp;анализу.</div>
+        <div class="how-title">Открой бот в&nbsp;Telegram</div>
+        <div class="how-desc">Отправь резюме и&nbsp;вакансию боту&nbsp;— он&nbsp;сам всё распознает и&nbsp;подготовит к&nbsp;анализу.</div>
         <div class="how-tag">30 секунд</div>
       </div>
       <div class="how-card">
@@ -695,51 +508,53 @@ footer{border-top:1px solid var(--border);padding:64px 24px 40px;background:var(
     <div class="sec-sub">Никаких скрытых списаний. Месячная подписка, отмена в&nbsp;любой момент.</div>
     <div class="pricing-grid">
 
-      <!-- Free / Starter -->
-      <div class="pc side">
+      <!-- Free / Starter (FEATURED) -->
+      <div class="pc feat">
+        <div class="pc-badge">ДОСТУПНО СЕЙЧАС</div>
         <div class="pc-name">Старт</div>
         <div class="pc-tagline">Попробуй без риска</div>
-        <div class="pc-price" style="color:#76A5FA">Бесплатно</div>
-        <div class="pc-period">3 генерации · карта не нужна</div>
+        <div class="pc-price" style="color:#3B7EF8">Бесплатно</div>
+        <div class="pc-period">Безлимит генераций · карта не&nbsp;нужна</div>
         <ul class="pc-feats">
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 3 полных цикла: анализ + улучшение резюме + сопроводительное</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Подробный match-отчёт</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Скачать резюме в PDF / DOCX</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Оплата только после исчерпания лимита</li>
+          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Безлимит: анализ + улучшение резюме + сопроводительное</li>
+          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Подробный match-отчёт</li>
+          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Скачать резюме в&nbsp;PDF / DOCX</li>
+          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Без регистрации — прямо в&nbsp;Telegram</li>
         </ul>
-        <button class="btn-pc bpc-ghost" onclick="document.getElementById('widget').scrollIntoView({behavior:'smooth'})">Начать бесплатно</button>
+        <a class="btn-pc bpc-main" href="https://t.me/OfferMatch_resume_helper_bot?start=site_pricing" target="_blank" style="text-align:center;text-decoration:none">Попробовать бесплатно</a>
       </div>
 
-      <!-- Pro (featured) -->
-      <div class="pc feat">
-        <div class="pc-badge">ПОПУЛЯРНЫЙ</div>
+      <!-- Pro -->
+      <div class="pc side">
+        <div class="pc-badge pc-badge-soon">СКОРО</div>
         <div class="pc-name">Профи</div>
         <div class="pc-tagline">Неделя активного поиска</div>
-        <div class="pc-price" style="color:#3B7EF8">399 ₽</div>
+        <div class="pc-price" style="color:#76A5FA">399 ₽</div>
         <div class="pc-period">за 7 дней · без автопродления</div>
         <ul class="pc-feats">
-          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Безлимитный анализ и адаптация резюме</li>
-          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Безлимитные сопроводительные письма</li>
-          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Детальный отчёт с графиками</li>
-          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Лента вакансий — свайп и мгновенная адаптация</li>
-          <li><span class="pfc b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Трекер откликов без лимитов</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Безлимитный анализ и&nbsp;адаптация резюме</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Безлимитные сопроводительные письма</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Детальный отчёт с&nbsp;графиками</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Лента вакансий — свайп и&nbsp;мгновенная адаптация</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Трекер откликов без лимитов</li>
         </ul>
-        <button class="btn-pc bpc-main" onclick="document.getElementById('widget').scrollIntoView({behavior:'smooth'})">Попробовать за 399 ₽</button>
+        <button class="btn-pc bpc-ghost" disabled>Скоро</button>
       </div>
 
       <!-- Career / Monthly -->
       <div class="pc side">
+        <div class="pc-badge pc-badge-soon">СКОРО</div>
         <div class="pc-name">Карьерный</div>
         <div class="pc-tagline">Месяц без ограничений</div>
         <div class="pc-price" style="color:#76A5FA">999 ₽</div>
-        <div class="pc-period">в месяц · отмена в любой момент</div>
+        <div class="pc-period">в&nbsp;месяц · отмена в&nbsp;любой момент</div>
         <ul class="pc-feats">
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Всё из «Профи» — без ограничений по времени</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Симулятор собеседования с ИИ</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 2 консультации с карьерным экспертом</li>
-          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Карьерная аналитика и приоритетная поддержка</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Всё из&nbsp;«Профи» — без ограничений по&nbsp;времени</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Симулятор собеседования с&nbsp;ИИ</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 2 консультации с&nbsp;карьерным экспертом</li>
+          <li><span class="pfc t"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Карьерная аналитика и&nbsp;приоритетная поддержка</li>
         </ul>
-        <button class="btn-pc bpc-ghost">Выбрать</button>
+        <button class="btn-pc bpc-ghost" disabled>Скоро</button>
       </div>
 
     </div>
@@ -840,15 +655,6 @@ footer{border-top:1px solid var(--border);padding:64px 24px 40px;background:var(
 </div><!-- .page -->
 
 <script>
-let rOk=false,vOk=false;
-function rTab(t){document.getElementById('rp-file').style.display=t==='file'?'block':'none';document.getElementById('rp-text').style.display=t==='text'?'block':'none';document.getElementById('rt-file').className='ptab'+(t==='file'?' on':'');document.getElementById('rt-text').className='ptab'+(t==='text'?' on':'');}
-function vTab(t){['text','url'].forEach(x=>{document.getElementById('vp-'+x).style.display=x===t?'block':'none';document.getElementById('vt-'+x).className='ptab'+(x===t?' on':'');});}
-function loadResume(){document.getElementById('dz-r').style.display='none';document.getElementById('fc-r').style.display='flex';document.getElementById('p-res').classList.add('filled');rOk=true;dot('r',true);check();}
-function clearResume(){document.getElementById('dz-r').style.display='block';document.getElementById('fc-r').style.display='none';document.getElementById('p-res').classList.remove('filled');rOk=false;dot('r',false);check();}
-function onVac(){const v=document.getElementById('vac-ta').value;document.getElementById('vac-cnt').textContent=v.length+' символов';vOk=v.length>10;if(vOk)document.getElementById('p-vac').classList.add('filled');else document.getElementById('p-vac').classList.remove('filled');dot('v',vOk);check();}
-function doFetch(){const u=document.getElementById('url-inp').value.trim();if(!u){alert('Вставьте ссылку');return;}vTab('text');document.getElementById('parsed-ok').style.display='inline-flex';const ta=document.getElementById('vac-ta');ta.value='Яндекс — Data Analyst\n\nТребования:\n— Python, SQL от 2 лет\n— Apache Spark и Airflow\n— Power BI / Tableau';ta.dispatchEvent(new Event('input'));}
-function dot(w,on){document.getElementById('wd-'+w).className='wf-dot '+(on?'on':'off');document.getElementById('wl-'+w).className='wf-lbl '+(on?'on':'off');}
-function check(){document.getElementById('btn-go').disabled=!(rOk&&vOk);}
 function faq(btn){const item=btn.closest('.faq-item');const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');}
 </script>
 </body>

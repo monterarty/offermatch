@@ -5,9 +5,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div className="text-[17px] font-bold mb-3 flex items-center gap-2 text-navy">
-              <div className="w-2 h-2 rounded-full bg-blue flex-shrink-0" />
-              OfferMatch
+            <div className="mb-3 flex items-center">
+              <img src="/logos/offer_match_2.png" alt="OfferMatch" className="h-7 w-auto" />
             </div>
             <div className="text-[12.5px] text-t3 leading-relaxed font-normal max-w-[210px]">
               ИИ-сервис для умного поиска работы. Адаптация резюме, трекер откликов, симулятор собеседований.

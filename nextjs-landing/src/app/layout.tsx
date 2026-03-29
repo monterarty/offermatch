@@ -9,7 +9,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "OfferMatch — Умная адаптация резюме",
-  description: "Загрузи резюме и вакансию — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
+  description: "Отправь резюме и вакансию боту — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
 };
 
 export default function RootLayout({

@@ -9,13 +9,6 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
-      {/* Background mesh */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="mesh-orb mesh-orb-1" />
-        <div className="mesh-orb mesh-orb-2" />
-        <div className="mesh-orb mesh-orb-3" />
-      </div>
-
       {/* Navigation */}
       <Navbar />
 
