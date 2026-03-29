@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Дизайн-система</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F6F7FB;color:#0F172A;line-height:1.6;font-size:14px;-webkit-font-smoothing:antialiased}
+.ds{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+.ds-header{margin-bottom:56px}
+.ds-header h1{font-size:36px;font-weight:800;letter-spacing:-1.5px;margin-bottom:8px}
+.ds-header p{font-size:15px;color:#64748B}
+.ds-section{margin-bottom:64px}
+.ds-section h2{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid #E4E6F0}
+.ds-section h3{font-size:15px;font-weight:600;color:#334155;margin:24px 0 12px}
+
+/* Color swatches */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.swatch{border-radius:12px;overflow:hidden;background:#fff}
+.swatch-color{height:64px}
+.swatch-info{padding:10px 12px}
+.swatch-name{font-size:11px;font-weight:600;color:#0F172A;margin-bottom:2px}
+.swatch-hex{font-size:11px;color:#94A3B8;font-family:monospace}
+.swatch-token{font-size:10px;color:#64748B;margin-top:2px}
+
+/* Typography */
+.type-row{margin-bottom:16px;padding:16px 20px;background:#fff;border-radius:12px;display:flex;align-items:baseline;gap:20px}
+.type-label{min-width:120px;font-size:11px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.type-meta{font-size:11px;color:#94A3B8;margin-left:auto;white-space:nowrap;flex-shrink:0}
+
+/* Radius */
+.radius-grid{display:flex;gap:16px;flex-wrap:wrap}
+.radius-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.radius-box{width:64px;height:64px;background:#fff;border:2px solid #3B7EF8}
+.radius-label{font-size:11px;font-weight:600;color:#334155}
+.radius-val{font-size:10px;color:#94A3B8;font-family:monospace}
+
+/* Buttons */
+.btn-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn-demo{padding:10px 22px;font-size:13.5px;font-weight:600;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .18s;line-height:1}
+.btn-cta-d{background:#3B7EF8;color:#fff;border:none}
+.btn-cta-d:hover{background:#2563EB;transform:translateY(-1px)}
+.btn-ghost-d{background:none;color:#334155;border:1px solid #CDD1E8}
+.btn-ghost-d:hover{border-color:#334155;color:#0F172A}
+.btn-analyze-d{padding:13px 28px;background:#3B7EF8;color:#fff;border:none;border-radius:16px;font-size:15px;display:flex;align-items:center;gap:8px}
+.btn-pc-ghost-d{background:none;border:1.5px solid #C5D9FF;color:#334155;border-radius:12px;padding:12px 20px}
+.btn-pc-main-d{background:#3B7EF8;border:1.5px solid #3B7EF8;color:#fff;border-radius:12px;padding:12px 20px}
+.btn-disabled-d{background:#CDD1E8;color:#94A3B8;border:none;border-radius:16px;padding:13px 28px;cursor:not-allowed}
+
+/* Badges */
+.badge-grid{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.badge-demo{display:inline-flex;align-items:center;gap:6px;background:#EBF2FF;border:1px solid #BFDBFE;border-radius:100px;padding:4px 12px;font-size:11px;color:#3B7EF8;font-weight:600}
+.badge-chip-d{background:#3B7EF8;color:#fff;font-size:10px;font-weight:700;padding:2px 9px;border-radius:100px;letter-spacing:.4px}
+.badge-hero-d{display:inline-flex;align-items:center;gap:8px;background:rgba(59,126,248,.15);border:1px solid rgba(59,126,248,.25);border-radius:100px;padding:5px 14px 5px 8px;font-size:12.5px;color:#3B7EF8;font-weight:500}
+
+/* Icons */
+.icon-grid{display:flex;gap:16px;flex-wrap:wrap}
+.icon-demo{width:40px;height:40px;border-radius:8px;background:#EBF2FF;color:#3B7EF8;display:flex;align-items:center;justify-content:center}
+.icon-demo svg{width:20px;height:20px}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card-demo{background:#fff;border-radius:20px;padding:28px}
+.card-demo.with-border{border:1.5px solid #BFDBFE}
+.card-demo.pricing{border:1.5px solid #E4E6F0;border-radius:28px;padding:32px}
+.card-demo.pricing.featured{border-color:#3B7EF8}
+.card-title{font-size:15px;font-weight:700;margin-bottom:6px;color:#0F172A}
+.card-desc{font-size:13px;color:#64748B;line-height:1.65}
+
+/* Inputs */
+.input-grid{display:flex;flex-direction:column;gap:12px;max-width:400px}
+.input-demo{background:#fff;border:1.5px solid #E4E6F0;border-radius:12px;padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#0F172A;outline:none;transition:border-color .2s}
+.input-demo:focus{border-color:#3B7EF8}
+.input-demo::placeholder{color:#CBD5E1}
+.textarea-demo{min-height:80px;resize:vertical}
+
+/* Gradient */
+.gradient-demo{height:200px;border-radius:20px;background:linear-gradient(180deg,#3E80F8 0%,#6B9FFA 40%,#F6F7FB 75%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:600}
+
+/* Chips (hero floating) */
+.chip-grid{display:flex;gap:10px;flex-wrap:wrap}
+.chip-demo{border-radius:100px;background:rgba(59,126,248,.15);backdrop-filter:blur(8px);border:1px solid rgba(59,126,248,.2);padding:8px 16px;font-size:12px;font-weight:600;color:#3B7EF8}
+.chip-on-blue{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff}
+
+/* Spacing */
+.spacing-grid{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+.spacing-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.spacing-bar{width:40px;background:#3B7EF8;border-radius:4px;opacity:.2}
+.spacing-label{font-size:10px;color:#94A3B8;font-family:monospace}
+
+/* Grid demo */
+.grid-demo{display:grid;gap:12px;margin-bottom:12px}
+.grid-cell{background:#EBF2FF;border:1px dashed #BFDBFE;border-radius:8px;height:48px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#3B7EF8;font-weight:600}
+
+/* States */
+.state-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.state-demo{background:#fff;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:12px}
+.state-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.state-label{font-size:12px;font-weight:500;color:#0F172A}
+.state-desc{font-size:11px;color:#94A3B8}
+
+/* Visualization */
+.viz-demo{background:#fff;border-radius:16px;padding:20px;max-width:480px}
+.viz-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.viz-bar-label{font-size:11px;color:#334155;font-weight:500;width:100px;flex-shrink:0}
+.viz-bar-track{flex:1;height:6px;border-radius:3px;background:rgba(143,183,255,.13)}
+.viz-bar-fill{height:100%;border-radius:3px;background:#8FB7FF}
+.viz-bar-val{font-size:11px;font-weight:700;color:#8FB7FF;width:32px;text-align:right}
+</style>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+</head>
+<body>
+<div class="ds">
+
+<div class="ds-header">
+  <h1>OfferMatch — Дизайн-система</h1>
+  <p>Спецификация компонентов, цветов, типографики и&nbsp;правил для&nbsp;всех страниц проекта</p>
+</div>
+
+<!-- COLORS -->
+<div class="ds-section">
+  <h2>Цвета</h2>
+
+  <h3>Поверхности</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border:1px solid #E4E6F0"></div><div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-token">--white</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F6F7FB"></div><div class="swatch-info"><div class="swatch-name">Background</div><div class="swatch-hex">#F6F7FB</div><div class="swatch-token">--bg</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#EEEEF6"></div><div class="swatch-info"><div class="swatch-name">Background 2</div><div class="swatch-hex">#EEEEF6</div><div class="swatch-token">--bg2</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#F0F2FA"></div><div class="swatch-info"><div class="swatch-name">Surface 2</div><div class="swatch-hex">#F0F2FA</div><div class="swatch-token">--surface2</div></div></div>
+  </div>
+
+  <h3>Обводки</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#E4E6F0"></div><div class="swatch-info"><div class="swatch-name">Border</div><div class="swatch-hex">#E4E6F0</div><div class="swatch-token">--border</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#CDD1E8"></div><div class="swatch-info"><div class="swatch-name">Border 2</div><div class="swatch-hex">#CDD1E8</div><div class="swatch-token">--border2</div></div></div>
+  </div>
+
+  <h3>Текст</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#0F172A"></div><div class="swatch-info"><div class="swatch-name">Navy</div><div class="swatch-hex">#0F172A</div><div class="swatch-token">--navy</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#1E293B"></div><div class="swatch-info"><div class="swatch-name">Navy 2</div><div class="swatch-hex">#1E293B</div><div class="swatch-token">--navy2</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#334155"></div><div class="swatch-info"><div class="swatch-name">Navy 3</div><div class="swatch-hex">#334155</div><div class="swatch-token">--navy3</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#64748B"></div><div class="swatch-info"><div class="swatch-name">Text 2</div><div class="swatch-hex">#64748B</div><div class="swatch-token">--t2</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#94A3B8"></div><div class="swatch-info"><div class="swatch-name">Text 3</div><div class="swatch-hex">#94A3B8</div><div class="swatch-token">--t3</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#CBD5E1"></div><div class="swatch-info"><div class="swatch-name">Text 4</div><div class="swatch-hex">#CBD5E1</div><div class="swatch-token">--t4</div></div></div>
+  </div>
+
+  <h3>Акцент — Blue</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#3B7EF8"></div><div class="swatch-info"><div class="swatch-name">Blue</div><div class="swatch-hex">#3B7EF8</div><div class="swatch-token">--blue</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#2563EB"></div><div class="swatch-info"><div class="swatch-name">Blue Dark</div><div class="swatch-hex">#2563EB</div><div class="swatch-token">--blue-d</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#8FB7FF"></div><div class="swatch-info"><div class="swatch-name">Blue Side</div><div class="swatch-hex">#8FB7FF</div><div class="swatch-token">--blue-side</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#76A5FA"></div><div class="swatch-info"><div class="swatch-name">Blue Muted</div><div class="swatch-hex">#76A5FA</div><div class="swatch-token">побочные цены</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#BFDBFE"></div><div class="swatch-info"><div class="swatch-name">Blue Medium</div><div class="swatch-hex">#BFDBFE</div><div class="swatch-token">--blue-m</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#EBF2FF"></div><div class="swatch-info"><div class="swatch-name">Blue Light</div><div class="swatch-hex">#EBF2FF</div><div class="swatch-token">--blue-l</div></div></div>
+  </div>
+
+  <h3>Success / Semantic</h3>
+  <div class="swatch-grid">
+    <div class="swatch"><div class="swatch-color" style="background:#00C837"></div><div class="swatch-info"><div class="swatch-name">Green</div><div class="swatch-hex">#00C837</div><div class="swatch-token">--green</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#E6FFEE"></div><div class="swatch-info"><div class="swatch-name">Green Light</div><div class="swatch-hex">#E6FFEE</div><div class="swatch-token">--green-l</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#D97706"></div><div class="swatch-info"><div class="swatch-name">Amber</div><div class="swatch-hex">#D97706</div><div class="swatch-token">--amber</div></div></div>
+    <div class="swatch"><div class="swatch-color" style="background:#FF007F"></div><div class="swatch-info"><div class="swatch-name">Coral</div><div class="swatch-hex">#FF007F</div><div class="swatch-token">--coral</div></div></div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY -->
+<div class="ds-section">
+  <h2>Типографика</h2>
+  <div class="type-row">
+    <div class="type-label">H1 Hero</div>
+    <div style="font-size:48px;font-weight:800;letter-spacing:-2.5px;line-height:1.05">Получи работу</div>
+    <div class="type-meta">clamp(42–76px) / 800 / -2.5px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">H2 Section</div>
+    <div style="font-size:36px;font-weight:700;letter-spacing:-.5px;line-height:1.1">Три шага до&nbsp;отклика</div>
+    <div class="type-meta">clamp(28–42px) / 700 / -0.5px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">H3 Card</div>
+    <div style="font-size:17px;font-weight:700;letter-spacing:-.3px">Загрузи резюме и&nbsp;вакансию</div>
+    <div class="type-meta">17px / 700 / -0.3px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">H4 Element</div>
+    <div style="font-size:15px;font-weight:700;letter-spacing:-.2px">Match-отчёт</div>
+    <div class="type-meta">15px / 700 / -0.2px</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Subtitle</div>
+    <div style="font-size:17px;color:#64748B">Загрузи резюме и&nbsp;вакансию&nbsp;— ИИ оценит соответствие</div>
+    <div class="type-meta">17px / 400 / --t2</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Body</div>
+    <div style="font-size:14px">Основной текст страницы для&nbsp;чтения</div>
+    <div class="type-meta">14px / 400</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Description</div>
+    <div style="font-size:13px;color:#64748B;line-height:1.65">Сервис задаёт точечные вопросы и&nbsp;дополняет резюме вашими ответами</div>
+    <div class="type-meta">13px / 400 / --t2</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Eyebrow</div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#3B7EF8">Как это работает</div>
+    <div class="type-meta">11px / 600 / 1.5px / uppercase</div>
+  </div>
+  <div class="type-row">
+    <div class="type-label">Caption</div>
+    <div style="font-size:11px;color:#94A3B8">0 символов · hh.ru · SuperJob</div>
+    <div class="type-meta">11px / 400 / --t3</div>
+  </div>
+</div>
+
+<!-- RADII -->
+<div class="ds-section">
+  <h2>Скругления</h2>
+  <div class="radius-grid">
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-label">r8</div><div class="radius-val">8px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px"></div><div class="radius-label">r12</div><div class="radius-val">12px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:16px"></div><div class="radius-label">r16</div><div class="radius-val">16px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:20px"></div><div class="radius-label">r20</div><div class="radius-val">20px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:28px"></div><div class="radius-label">r28</div><div class="radius-val">28px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:50%"></div><div class="radius-label">pill</div><div class="radius-val">100px</div></div>
+  </div>
+</div>
+
+<!-- GRADIENT -->
+<div class="ds-section">
+  <h2>Градиент Hero</h2>
+  <div class="gradient-demo">
+    linear-gradient(180deg, #3E80F8 → #6B9FFA → #F6F7FB)
+  </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="ds-section">
+  <h2>Кнопки</h2>
+  <h3>Основные</h3>
+  <div class="btn-grid">
+    <button class="btn-demo btn-cta-d">Попробовать бесплатно</button>
+    <button class="btn-demo btn-ghost-d">Войти</button>
+    <button class="btn-demo btn-analyze-d">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.59 7.76L22 12l-7.41 3.24L12 23l-2.59-7.76L2 12l7.41-3.24L12 1z"/><path d="M21 14l1.32 3.96L26 19.5l-3.68 1.54L21 25l-1.32-3.96L16 19.5l3.68-1.54L21 14z"/></svg>
+      Анализировать резюме
+    </button>
+    <button class="btn-demo btn-disabled-d" disabled>Disabled</button>
+  </div>
+
+  <h3>Тарифы</h3>
+  <div class="btn-grid">
+    <button class="btn-demo btn-pc-ghost-d">Начать бесплатно</button>
+    <button class="btn-demo btn-pc-main-d">Попробовать за&nbsp;399 ₽</button>
+    <button class="btn-demo btn-pc-ghost-d">Выбрать</button>
+  </div>
+</div>
+
+<!-- BADGES -->
+<div class="ds-section">
+  <h2>Бейджи и&nbsp;теги</h2>
+  <div class="badge-grid">
+    <div class="badge-hero-d"><span class="badge-chip-d">NEW</span> Умная адаптация резюме</div>
+    <div class="badge-demo">Шаг 1</div>
+    <div class="badge-demo">Шаг 2</div>
+    <div class="badge-demo">30 секунд</div>
+    <div class="badge-demo">Match растёт на&nbsp;10–15%</div>
+    <div class="badge-demo">Трекер + история откликов</div>
+  </div>
+
+  <h3>Чипы (на&nbsp;градиенте)</h3>
+  <div style="background:linear-gradient(135deg,#3E80F8,#6B9FFA);border-radius:16px;padding:20px;display:flex;gap:10px;flex-wrap:wrap">
+    <div class="chip-demo chip-on-blue">Оффер</div>
+    <div class="chip-demo chip-on-blue">CV готово</div>
+    <div class="chip-demo chip-on-blue">Match 87%</div>
+  </div>
+</div>
+
+<!-- ICONS -->
+<div class="ds-section">
+  <h2>Иконки</h2>
+  <p style="font-size:13px;color:#64748B;margin-bottom:16px">Все иконки — залитые (fill), единая голубая палитра</p>
+  <div class="icon-grid">
+    <div class="icon-demo"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="18" y="3" width="4" height="18" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="2" y="13" width="4" height="8" rx="1"/></svg></div>
+    <div class="icon-demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+    <div class="icon-demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+    <div class="icon-demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div>
+    <div class="icon-demo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="ds-section">
+  <h2>Карточки</h2>
+  <div class="card-grid">
+    <div class="card-demo">
+      <div class="card-title">Обычная карточка</div>
+      <div class="card-desc">Без обводки, белый фон, r20. Для секций «Как работает», «Инструменты», FAQ.</div>
+    </div>
+    <div class="card-demo with-border">
+      <div class="card-title">Акцентная карточка</div>
+      <div class="card-desc">Обводка 1.5px --blue-m. Для выделенных feature-карточек.</div>
+    </div>
+    <div class="card-demo pricing">
+      <div class="card-title">Тарифная карточка</div>
+      <div class="card-desc">Обводка --border, r28. Для блока тарифов.</div>
+    </div>
+  </div>
+  <div style="margin-top:16px">
+    <div class="card-grid" style="grid-template-columns:1fr">
+      <div class="card-demo pricing featured">
+        <div class="card-title">Featured тариф</div>
+        <div class="card-desc">Обводка 1.5px --blue. Для выделенного тарифа «Профи».</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INPUTS -->
+<div class="ds-section">
+  <h2>Поля ввода</h2>
+  <div class="input-grid">
+    <input class="input-demo" type="text" placeholder="Placeholder text...">
+    <input class="input-demo" type="url" placeholder="https://hh.ru/vacancy/12345678">
+    <textarea class="input-demo textarea-demo" placeholder="Вставьте текст вакансии..."></textarea>
+  </div>
+  <p style="font-size:11px;color:#94A3B8;margin-top:8px">Border: 1.5px --border → focus: --blue. Radius: r12. Padding: 10px 14px.</p>
+</div>
+
+<!-- VISUALIZATIONS -->
+<div class="ds-section">
+  <h2>Визуализации</h2>
+  <p style="font-size:13px;color:#64748B;margin-bottom:16px">Основной цвет: #8FB7FF. Используются только в&nbsp;акцентных карточках.</p>
+  <div class="viz-demo">
+    <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:12px">
+      <span style="font-size:28px;font-weight:800;letter-spacing:-1px">78%</span>
+      <span style="font-size:11px;color:#8FB7FF;font-weight:600">+12%</span>
+      <span style="font-size:10px;color:#94A3B8;margin-left:4px">Общий Match-скор</span>
+    </div>
+    <div class="viz-bar-row"><span class="viz-bar-label">Hard Skills</span><div class="viz-bar-track"><div class="viz-bar-fill" style="width:92%"></div></div><span class="viz-bar-val">92%</span></div>
+    <div class="viz-bar-row"><span class="viz-bar-label">Soft Skills</span><div class="viz-bar-track"><div class="viz-bar-fill" style="width:68%;opacity:.7"></div></div><span class="viz-bar-val" style="opacity:.7">68%</span></div>
+    <div class="viz-bar-row"><span class="viz-bar-label">Ключевые слова</span><div class="viz-bar-track"><div class="viz-bar-fill" style="width:74%;opacity:.5"></div></div><span class="viz-bar-val" style="opacity:.5">74%</span></div>
+  </div>
+</div>
+
+<!-- GRIDS -->
+<div class="ds-section">
+  <h2>Сетки</h2>
+
+  <h3>3 колонки (How, Features)</h3>
+  <div class="grid-demo" style="grid-template-columns:repeat(3,1fr)">
+    <div class="grid-cell">1fr</div><div class="grid-cell">1fr</div><div class="grid-cell">1fr</div>
+  </div>
+
+  <h3>2 + 1 (Feature wide)</h3>
+  <div class="grid-demo" style="grid-template-columns:repeat(3,1fr)">
+    <div class="grid-cell" style="grid-column:span 2">span 2</div><div class="grid-cell">1fr</div>
+  </div>
+
+  <h3>Footer (1.6fr 1fr 1fr 1fr)</h3>
+  <div class="grid-demo" style="grid-template-columns:1.6fr 1fr 1fr 1fr">
+    <div class="grid-cell">1.6fr</div><div class="grid-cell">1fr</div><div class="grid-cell">1fr</div><div class="grid-cell">1fr</div>
+  </div>
+</div>
+
+<!-- SPACING -->
+<div class="ds-section">
+  <h2>Отступы</h2>
+  <div class="spacing-grid">
+    <div class="spacing-item"><div class="spacing-bar" style="height:8px"></div><div class="spacing-label">8px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:12px"></div><div class="spacing-label">12px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:16px"></div><div class="spacing-label">16px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:20px"></div><div class="spacing-label">20px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:24px"></div><div class="spacing-label">24px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:28px"></div><div class="spacing-label">28px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:32px"></div><div class="spacing-label">32px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:48px"></div><div class="spacing-label">48px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:56px"></div><div class="spacing-label">56px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:64px"></div><div class="spacing-label">64px</div></div>
+    <div class="spacing-item"><div class="spacing-bar" style="height:96px"></div><div class="spacing-label">96px</div></div>
+  </div>
+</div>
+
+<!-- STATES -->
+<div class="ds-section">
+  <h2>Состояния</h2>
+  <div class="state-grid">
+    <div class="state-demo"><div class="state-dot" style="background:#3B7EF8"></div><div><div class="state-label">Focus</div><div class="state-desc">border-color: --blue</div></div></div>
+    <div class="state-demo"><div class="state-dot" style="background:#00C837"></div><div><div class="state-label">Filled / Success</div><div class="state-desc">border-color: --green</div></div></div>
+    <div class="state-demo"><div class="state-dot" style="background:#CDD1E8"></div><div><div class="state-label">Disabled</div><div class="state-desc">bg: --border2, color: --t3</div></div></div>
+    <div class="state-demo"><div class="state-dot" style="background:#BFDBFE"></div><div><div class="state-label">Hover card</div><div class="state-desc">translateY(-3..4px)</div></div></div>
+    <div class="state-demo"><div class="state-dot" style="background:#2563EB"></div><div><div class="state-label">Hover button</div><div class="state-desc">translateY(-1px), --blue-d</div></div></div>
+    <div class="state-demo"><div class="state-dot" style="background:#3B7EF8"></div><div><div class="state-label">FAQ open</div><div class="state-desc">border: --blue-m, arrow rotate(180deg)</div></div></div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="ds-section">
+  <h2>Правила типографики</h2>
+  <div style="background:#fff;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0F172A;margin-bottom:4px">Висячие предлоги</div>
+      <div style="font-size:13px;color:#64748B">Предлоги (в, на, и, за, с, по, к, без, из, от) и&nbsp;тире привязываются к&nbsp;следующему слову через <code style="background:#EBF2FF;padding:2px 6px;border-radius:4px;font-size:12px;color:#3B7EF8">&amp;nbsp;</code></div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0F172A;margin-bottom:4px">Числа</div>
+      <div style="font-size:13px;color:#64748B">Разделитель тысяч через неразрывный пробел: 12&nbsp;000</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0F172A;margin-bottom:4px">Тон</div>
+      <div style="font-size:13px;color:#64748B">Глаголы в&nbsp;повелительном наклонении: Сравните, Создавайте, Скачивайте. Человеческий язык вместо системного.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0F172A;margin-bottom:4px">Без теней и&nbsp;разделителей</div>
+      <div style="font-size:13px;color:#64748B">Карточки выделяются фоном. Линий-разделителей между секциями нет.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
