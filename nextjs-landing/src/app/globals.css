@@ -108,6 +108,10 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(110px);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .mesh-orb-1 {
@@ -139,6 +143,10 @@ body {
 
 .hero-float {
   animation: hero-float 6s ease-in-out infinite;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Custom scrollbar */
