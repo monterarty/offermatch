@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Сопроводительное письмо</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F0F4FF;--surface:#fff;--s2:#F7F9FF;--border:#E2E8F8;--border2:#C8D4F0;--ink:#111827;--ink2:#6B7280;--ink3:#9CA3AF;--ink4:#D1D5DB;--blue:#2563EB;--blue-h:#1D4ED8;--blue-l:#EFF4FF;--blue-m:#BFCFFE;--ok:#16A34A;--ok-bg:#F0FDF4;--ok-bd:#BBF7D0;--r6:6px;--r10:10px;--r14:14px;--r20:20px;--sh:0 1px 3px rgba(17,24,39,.07);--sh2:0 4px 16px rgba(17,24,39,.08);--ff:'Inter',sans-serif;}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;padding:0 28px;gap:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.logo{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:7px;letter-spacing:-.3px}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-back{font-size:13px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:var(--ff);text-decoration:none;padding:5px 10px;border-radius:var(--r6);transition:all .15s}
+.nav-back:hover{color:var(--ink);background:var(--blue-l)}
+.wrap{display:flex;padding-top:54px;min-height:100vh}
+.sb{width:236px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+.sb-title{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);padding:0 6px;margin-bottom:12px}
+.step{display:flex;align-items:flex-start;gap:9px;padding:8px 6px;border-radius:var(--r10);margin-bottom:1px;position:relative}
+.step::after{content:'';position:absolute;left:21px;top:38px;width:1px;height:22px;background:var(--border)}
+.step:last-of-type::after{display:none}
+.step.done{opacity:.5}.step.active{background:var(--blue-l)}
+.step-n{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;border:1.5px solid var(--border2);color:var(--ink3)}
+.step.active .step-n{background:var(--blue);border-color:var(--blue);color:#fff}
+.step.done .step-n{background:var(--ok);border-color:var(--ok);color:#fff}
+.step-name{font-size:12px;font-weight:500;color:var(--ink);padding-top:2px}
+.step-hint{font-size:11px;color:var(--ink3);margin-top:1px}
+.sb-div{height:1px;background:var(--border);margin:14px 0}
+.sb-sub{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);padding:0 6px;margin-bottom:8px}
+.resp-c{background:var(--s2);border:1px solid var(--border);border-radius:var(--r10);padding:10px 12px}
+.resp-c.on{border-color:var(--blue-m);background:var(--blue-l)}
+.resp-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.resp-sub{font-size:11px;color:var(--ink3)}
+
+.main{flex:1;display:flex;gap:0;overflow:hidden}
+
+/* Letter panel */
+.letter-panel{flex:1;padding:28px 32px;overflow-y:auto;border-right:1px solid var(--border)}
+.panel-h{font-size:18px;font-weight:700;letter-spacing:-.3px;margin-bottom:4px}
+.panel-s{font-size:13px;color:var(--ink2);margin-bottom:20px}
+
+/* Style chips */
+.style-chips{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.chip{padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;border:1.5px solid var(--border);cursor:pointer;background:none;color:var(--ink2);font-family:var(--ff);transition:all .15s}
+.chip.on{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.chip:hover{border-color:var(--border2)}
+
+/* Letter doc */
+.letter-doc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r20);overflow:hidden;box-shadow:var(--sh2)}
+.letter-header{background:var(--s2);padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.letter-to{font-size:13px;font-weight:600;color:var(--ink)}
+.letter-meta{font-size:11px;color:var(--ink3)}
+.letter-body{padding:24px}
+.letter-ta{width:100%;min-height:420px;background:transparent;border:none;outline:none;resize:none;font-family:var(--ff);font-size:14px;color:var(--ink);line-height:1.8;letter-spacing:-.1px}
+
+/* Right panel */
+.right-panel{width:280px;flex-shrink:0;padding:24px 20px;overflow-y:auto;background:var(--s2)}
+
+.result-card{background:var(--surface);border:1px solid var(--ok-bd);border-radius:var(--r20);padding:18px;margin-bottom:16px;box-shadow:var(--sh2)}
+.rc-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.rc-s{font-size:12px;color:var(--ink2);line-height:1.5}
+.rc-pills{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.rc-pill{padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500;background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-m)}
+.rc-pill.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-bd)}
+
+.actions-panel{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.btn-p{width:100%;padding:11px;background:var(--blue);color:#fff;border:none;border-radius:var(--r10);font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s;text-align:center}
+.btn-p:hover{background:var(--blue-h)}
+.btn-s{width:100%;padding:10px;background:none;color:var(--ink);border:1px solid var(--border2);border-radius:var(--r10);font-family:var(--ff);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-s:hover{border-color:var(--blue);color:var(--blue)}
+.btn-final{width:100%;padding:11px;background:var(--ok);color:#fff;border:none;border-radius:var(--r10);font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:4px}
+.btn-final:hover{background:#15803D}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="01-new-landing.html" class="logo"><div class="ldot"></div>OfferMatch</a>
+  <a href="05-new-adapted.html" class="nav-back">← Назад</a>
+</nav>
+
+<div class="wrap">
+  <aside class="sb">
+    <div class="sb-title">Умный отклик</div>
+    <div class="step done"><div class="step-n">1</div><div><div class="step-name">Загрузить данные</div></div></div>
+    <div class="step done"><div class="step-n">2</div><div><div class="step-name">Результаты анализа</div></div></div>
+    <div class="step done"><div class="step-n">3</div><div><div class="step-name">Ответить на вопросы</div></div></div>
+    <div class="step done"><div class="step-n">4</div><div><div class="step-name">Адаптировать резюме</div></div></div>
+    <div class="step active"><div class="step-n">5</div><div><div class="step-name">Написать письмо</div><div class="step-hint">Текущий шаг</div></div></div>
+    <div class="sb-div"></div>
+    <div class="sb-sub">Мои отклики</div>
+    <div class="resp-c on"><div class="resp-name">Яндекс — Data Analyst</div><div class="resp-sub">91% · Сегодня</div></div>
+  </aside>
+
+  <div class="main">
+    <div class="letter-panel">
+      <div class="panel-h">Сопроводительное письмо</div>
+      <div class="panel-s">Сгенерировано на основе вашего CV, вакансии и ответов на вопросы</div>
+
+      <div class="style-chips">
+        <button class="chip on">Деловой</button>
+        <button class="chip">Дружелюбный</button>
+        <button class="chip">Краткий</button>
+        <button class="chip">Развёрнутый</button>
+      </div>
+
+      <div class="letter-doc">
+        <div class="letter-header">
+          <div class="letter-to">Яндекс — Data Analyst</div>
+          <div class="letter-meta">Сгенерировано ИИ · 16 марта 2026</div>
+        </div>
+        <div class="letter-body">
+          <textarea class="letter-ta" id="letter-ta">Добрый день!
+
+Меня зовут Анна Иванова, я аналитик данных с 4-летним опытом. Хочу присоединиться к команде Яндекса на позицию Data Analyst.
+
+В своей работе я активно использую Python и SQL для обработки больших объёмов данных, строю дашборды в Power BI и Tableau, провожу A/B-тесты. В Тинькофф я участвовала в проектировании ETL-пайплайнов для обработки 50M+ событий в сутки, что позволило ускорить аналитическую отчётность на 40%.
+
+Дополнительно имею опыт настройки Airflow DAG-пайплайнов для автоматизации аналитических задач — это напрямую соответствует вашим требованиям к работе с оркестраторами данных.
+
+Готова к удалённой работе и быстро адаптируюсь к новым инструментам. Буду рада рассказать подробнее на собеседовании.
+
+С уважением,
+Анна Иванова</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="result-card">
+        <div class="rc-t">Отклик готов к отправке</div>
+        <div class="rc-s">Резюме адаптировано, письмо написано. Всё соответствует требованиям вакансии.</div>
+        <div class="rc-pills">
+          <span class="rc-pill ok">Match 91%</span>
+          <span class="rc-pill">4 правки приняты</span>
+        </div>
+      </div>
+
+      <div class="actions-panel">
+        <button class="btn-p">Скачать PDF-резюме</button>
+        <button class="btn-s">Копировать письмо</button>
+        <button class="btn-s">Скачать письмо .docx</button>
+        <button class="btn-final" onclick="location.href='07-new-dashboard.html'">Сохранить в архив →</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

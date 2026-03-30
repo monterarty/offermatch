@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Ответить на вопросы</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F0F4FF;--surface:#fff;--s2:#F7F9FF;--border:#E2E8F8;--border2:#C8D4F0;--ink:#111827;--ink2:#6B7280;--ink3:#9CA3AF;--ink4:#D1D5DB;--blue:#2563EB;--blue-h:#1D4ED8;--blue-l:#EFF4FF;--blue-m:#BFCFFE;--ok:#16A34A;--ok-bg:#F0FDF4;--ok-bd:#BBF7D0;--r6:6px;--r10:10px;--r14:14px;--r20:20px;--sh:0 1px 3px rgba(17,24,39,.07);--ff:'Inter',sans-serif;}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;padding:0 28px;gap:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.logo{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:7px;letter-spacing:-.3px}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-back{font-size:13px;color:var(--ink3);background:none;border:none;cursor:pointer;font-family:var(--ff);text-decoration:none;padding:5px 10px;border-radius:var(--r6);transition:all .15s}
+.nav-back:hover{color:var(--ink);background:var(--blue-l)}
+.wrap{display:flex;padding-top:54px;min-height:100vh}
+.sb{width:236px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:54px;height:calc(100vh - 54px);overflow-y:auto}
+.sb-title{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);padding:0 6px;margin-bottom:12px}
+.step{display:flex;align-items:flex-start;gap:9px;padding:8px 6px;border-radius:var(--r10);margin-bottom:1px;position:relative}
+.step::after{content:'';position:absolute;left:21px;top:38px;width:1px;height:22px;background:var(--border)}
+.step:last-of-type::after{display:none}
+.step.done{opacity:.5}.step.active{background:var(--blue-l)}
+.step-n{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;border:1.5px solid var(--border2);color:var(--ink3)}
+.step.active .step-n{background:var(--blue);border-color:var(--blue);color:#fff}
+.step.done .step-n{background:var(--ok);border-color:var(--ok);color:#fff}
+.step-name{font-size:12px;font-weight:500;color:var(--ink);padding-top:2px}
+.step-hint{font-size:11px;color:var(--ink3);margin-top:1px}
+.sb-div{height:1px;background:var(--border);margin:14px 0}
+.sb-sub{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);padding:0 6px;margin-bottom:8px}
+.resp-c{background:var(--s2);border:1px solid var(--border);border-radius:var(--r10);padding:10px 12px}
+.resp-c.on{border-color:var(--blue-m);background:var(--blue-l)}
+.resp-name{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.resp-sub{font-size:11px;color:var(--ink3)}
+
+.main{flex:1;padding:32px;overflow-y:auto;max-width:720px}
+.page-h{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
+.page-s{font-size:13px;color:var(--ink2);margin-bottom:20px}
+
+/* Progress */
+.prog-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.prog-label{font-size:13px;font-weight:500;color:var(--ink)}
+.prog-count{font-size:12px;color:var(--ink3)}
+.prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .5s ease}
+.prog-sub{font-size:11px;color:var(--ink3);margin-bottom:24px}
+
+/* Callout */
+.callout{background:var(--blue-l);border:1.5px solid var(--blue-m);border-radius:var(--r14);padding:14px 16px;margin-bottom:22px;display:flex;gap:11px}
+.callout-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.callout-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.callout-s{font-size:12px;color:var(--ink2);line-height:1.55}
+.callout-hi{color:var(--blue);font-weight:600}
+
+/* Chat */
+.chat{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.msg{display:flex;gap:10px;align-items:flex-start;animation:msgIn .25s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.msg.user{flex-direction:row-reverse}
+.av{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:1px solid var(--border)}
+.av.bot{background:var(--blue);color:#fff;font-size:11px;font-weight:700}
+.av.usr{background:var(--s2)}
+.bubble{max-width:500px;padding:11px 14px;border-radius:var(--r14);font-size:13px;line-height:1.6}
+.msg.bot .bubble{background:var(--surface);border:1px solid var(--border);color:var(--ink);border-bottom-left-radius:4px;box-shadow:var(--sh)}
+.msg.user .bubble{background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+
+/* Options */
+.opts{margin-left:40px;margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
+.opt{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r10);padding:10px 14px;font-size:13px;color:var(--ink);cursor:pointer;transition:all .18s;text-align:left;font-family:var(--ff);display:flex;align-items:center;gap:9px;box-shadow:var(--sh)}
+.opt:hover{border-color:var(--blue-m);background:var(--blue-l)}
+.opt.picked{border-color:var(--ok-bd);background:var(--ok-bg);color:var(--ok)}
+.opt-ico{font-size:14px;flex-shrink:0;opacity:.55}
+
+/* Expand zone */
+.expand-zone{margin-left:40px;margin-bottom:14px;display:none}
+.expand-ta{width:100%;min-height:72px;background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r10);padding:10px 13px;font-family:var(--ff);font-size:13px;color:var(--ink);resize:none;outline:none;transition:border-color .2s}
+.expand-ta:focus{border-color:var(--blue)}
+.expand-ta::placeholder{color:var(--ink4)}
+.btn-send{margin-top:7px;padding:9px 18px;background:var(--blue);color:#fff;border:none;border-radius:var(--r10);font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-send:hover{background:var(--blue-h)}
+
+/* Next prompt */
+.next-prompt{display:none;background:var(--ok-bg);border:1.5px solid var(--ok-bd);border-radius:var(--r14);padding:14px 16px;margin-bottom:14px;animation:msgIn .3s ease}
+.next-prompt.show{display:flex;align-items:center;gap:14px}
+.np-body{flex:1}
+.np-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.np-s{font-size:12px;color:var(--ink2)}
+.np-badge{display:inline-flex;align-items:center;gap:4px;background:var(--ok-bg);border:1px solid var(--ok-bd);border-radius:100px;padding:2px 8px;font-size:10px;color:var(--ok);font-weight:600;margin-top:5px}
+.btn-next{padding:10px 20px;background:var(--blue);color:#fff;border:none;border-radius:var(--r10);font-family:var(--ff);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .15s}
+.btn-next:hover{background:var(--blue-h)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="01-new-landing.html" class="logo"><div class="ldot"></div>OfferMatch</a>
+  <a href="03-new-results.html" class="nav-back">← Назад</a>
+</nav>
+
+<div class="wrap">
+  <aside class="sb">
+    <div class="sb-title">Умный отклик</div>
+    <div class="step done"><div class="step-n">1</div><div><div class="step-name">Загрузить данные</div></div></div>
+    <div class="step done"><div class="step-n">2</div><div><div class="step-name">Результаты анализа</div></div></div>
+    <div class="step active"><div class="step-n">3</div><div><div class="step-name">Ответить на вопросы</div><div class="step-hint">Текущий шаг</div></div></div>
+    <div class="step"><div class="step-n">4</div><div><div class="step-name">Адаптировать резюме</div></div></div>
+    <div class="step"><div class="step-n">5</div><div><div class="step-name">Написать письмо</div></div></div>
+    <div class="sb-div"></div>
+    <div class="sb-sub">Мои отклики</div>
+    <div class="resp-c on"><div class="resp-name">Яндекс — Data Analyst</div><div class="resp-sub">78% · Сегодня</div></div>
+  </aside>
+
+  <main class="main">
+    <div class="page-h">Уточняющие вопросы</div>
+    <div class="page-s">ИИ задаёт вопросы о вашем опыте чтобы усилить резюме</div>
+
+    <div class="callout">
+      <div class="callout-ico">💬</div>
+      <div>
+        <div class="callout-t">Как это работает?</div>
+        <div class="callout-s">Бот спрашивает о навыках из вакансии, которых нет в резюме. Ответьте да/нет — если да, расскажите подробнее. Бот перефразирует ваши ответы и добавит в CV. Match вырастет с <span class="callout-hi">78% → 87-92%</span></div>
+      </div>
+    </div>
+
+    <div class="prog-header">
+      <span class="prog-label" id="prog-label">Вопрос 1 из 3</span>
+      <span class="prog-count" id="prog-count">1/3</span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="prog" style="width:33%"></div></div>
+    <div class="prog-sub" id="prog-sub">Отвечайте своими словами — бот сам перефразирует</div>
+
+    <div class="chat" id="chat">
+      <div class="msg bot">
+        <div class="av bot">AI</div>
+        <div class="bubble">В вакансии требуется <strong>Apache Spark</strong>. Вы работали с большими данными или распределёнными вычислениями — даже в учебных проектах или хакатонах?</div>
+      </div>
+    </div>
+
+    <div class="opts" id="opts">
+      <button class="opt" onclick="pick(this,'yes')"><span class="opt-ico">✓</span>Да, есть опыт — расскажу подробнее</button>
+      <button class="opt" onclick="pick(this,'similar')"><span class="opt-ico">≈</span>Работал с похожим — Hadoop, Dask, PySpark</button>
+      <button class="opt" onclick="pick(this,'no')"><span class="opt-ico">✕</span>Нет, этого опыта не было</button>
+    </div>
+
+    <div class="expand-zone" id="expand-zone">
+      <textarea class="expand-ta" id="expand-ta" placeholder="Расскажите подробнее: какой проект, объём данных, что делали..."></textarea>
+      <button class="btn-send" onclick="sendExpand()">Отправить →</button>
+    </div>
+
+    <div class="next-prompt" id="next-prompt">
+      <div class="np-body">
+        <div class="np-t" id="np-t">Отлично, переходим к следующему вопросу</div>
+        <div class="np-s" id="np-s">ИИ записал информацию и обновит резюме</div>
+        <div class="np-badge" id="np-badge">+3% к match</div>
+      </div>
+      <button class="btn-next" id="btn-next" onclick="advance()">Следующий →</button>
+    </div>
+  </main>
+</div>
+
+<script>
+let step=0;
+const qs=[
+  {text:'Про <strong>Airflow</strong>: настраивали пайплайны или автоматизировали процессы — хотя бы в pet-проектах?',opts:[{ico:'✓',l:'Да, есть опыт с Airflow'},{ico:'≈',l:'Работал с Cron / Luigi / Prefect'},{ico:'✕',l:'Нет, оркестраторов не использовал'}]},
+  {text:'Последний вопрос — есть ли у вас кейсы <strong>A/B-тестирования</strong> с измеримыми результатами?',opts:[{ico:'✓',l:'Да, проводил — есть конкретные цифры'},{ico:'≈',l:'Базовый уровень, теорию знаю хорошо'},{ico:'✕',l:'Нет опыта с A/B-тестами'}]}
+];
+function pick(btn,val){
+  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('picked'));btn.classList.add('picked');
+  if(val==='yes'){document.getElementById('expand-zone').style.display='block';}
+  else showNext('Ответ принят — переходим дальше','Информация записана','+3% к match');
+}
+function sendExpand(){
+  const v=document.getElementById('expand-ta').value.trim();if(!v)return;
+  addMsg('user',v);document.getElementById('expand-ta').value='';document.getElementById('expand-zone').style.display='none';
+  setTimeout(()=>{addMsg('bot','Отлично! Бот перефразирует ваш ответ и добавит в раздел «О себе» и «Навыки».');showNext('Ответ добавлен в резюме','Формулировка оптимизирована под вакансию','+5% к match');},600);
+}
+function addMsg(r,t){
+  const c=document.getElementById('chat');
+  c.innerHTML+=`<div class="msg ${r}"><div class="av ${r}">${r==='bot'?'AI':'Вы'}</div><div class="bubble">${t}</div></div>`;
+  c.scrollTop=c.scrollHeight;
+}
+function showNext(t,s,b){
+  document.getElementById('np-t').textContent=t;document.getElementById('np-s').textContent=s;document.getElementById('np-badge').textContent=b;document.getElementById('next-prompt').classList.add('show');
+}
+function advance(){
+  document.getElementById('next-prompt').classList.remove('show');document.querySelectorAll('.opt').forEach(b=>b.classList.remove('picked'));document.getElementById('expand-zone').style.display='none';step++;
+  const p=document.getElementById('prog'),l=document.getElementById('prog-label'),cnt=document.getElementById('prog-count'),o=document.getElementById('opts');
+  if(step===1){
+    p.style.width='66%';l.textContent='Вопрос 2 из 3';cnt.textContent='2/3';
+    addMsg('bot',qs[0].text);
+    o.innerHTML=qs[0].opts.map(x=>`<button class="opt" onclick="pick(this,'${x.l}')"><span class="opt-ico">${x.ico}</span>${x.l}</button>`).join('');
+  }else if(step===2){
+    p.style.width='100%';l.textContent='Вопрос 3 из 3 — последний!';cnt.textContent='3/3';
+    addMsg('bot',qs[1].text);
+    o.innerHTML=qs[1].opts.map(x=>`<button class="opt" onclick="pick(this,'${x.l}')"><span class="opt-ico">${x.ico}</span>${x.l}</button>`).join('');
+  }else{
+    l.textContent='Все вопросы отвечены';document.getElementById('prog-sub').textContent='Резюме обновляется...';
+    o.style.display='none';
+    addMsg('bot','Готово! Все ответы добавлены в резюме. Match вырос с <strong>78% → 91%</strong>. Посмотрите адаптированную версию.');
+    document.getElementById('np-t').textContent='Резюме обновлено — посмотрите результат';
+    document.getElementById('np-s').textContent='Match вырос: 78% → 91%';
+    document.getElementById('np-badge').textContent='78% → 91%';
+    document.getElementById('btn-next').textContent='Смотреть резюме →';
+    document.getElementById('btn-next').onclick=()=>location.href='05-new-adapted.html';
+    document.getElementById('next-prompt').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Мэтч</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4FF;--surface:#fff;--s2:#F7F9FF;
+  --border:#E2E8F8;--border2:#C8D4F0;
+  --ink:#111827;--ink2:#6B7280;--ink3:#9CA3AF;--ink4:#D1D5DB;
+  --blue:#2563EB;--blue-h:#1D4ED8;--blue-l:#EFF4FF;--blue-m:#BFCFFE;
+  --ok:#16A34A;--ok-bg:#F0FDF4;--ok-bd:#BBF7D0;
+  --no:#EF4444;--no-bg:#FEF2F2;--no-bd:#FECACA;
+  --warn:#CA8A04;--warn-bg:#FEFCE8;
+  --r6:6px;--r8:8px;--r10:10px;--r14:14px;--r20:20px;--r28:28px;
+  --sh:0 1px 3px rgba(17,24,39,.07);
+  --sh2:0 8px 32px rgba(17,24,39,.11);
+  --ff:'Inter',sans-serif;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:54px;
+  display:flex;align-items:center;padding:0 24px;gap:20px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.3px;display:flex;align-items:center;gap:7px}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-link{font-size:13px;color:var(--ink2);padding:5px 11px;border-radius:var(--r6);border:none;background:none;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.nav-link:hover,.nav-link.on{background:var(--blue-l);color:var(--blue)}
+.nav-link.on{font-weight:500}
+.nav-r{margin-left:auto;display:flex;gap:8px}
+.btn-sm{font-size:12px;color:var(--ink2);background:none;border:1px solid var(--border2);border-radius:var(--r6);padding:6px 14px;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.btn-sm:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ── PAGE FRAME ── */
+.page{
+  position:fixed;top:54px;left:0;right:0;bottom:0;
+  display:flex;flex-direction:column;
+}
+
+/* ── TOOLBAR ── */
+.toolbar{
+  flex-shrink:0;height:46px;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 20px;gap:8px;
+  position:relative;z-index:100;
+}
+.tb-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 12px;font-size:12px;font-weight:500;
+  border:1px solid var(--border);border-radius:var(--r8);
+  background:none;cursor:pointer;color:var(--ink2);
+  font-family:var(--ff);transition:all .15s;
+}
+.tb-btn:hover{border-color:var(--blue-m);color:var(--blue);background:var(--blue-l)}
+.tb-btn.active{background:var(--blue-l);border-color:var(--blue-m);color:var(--blue)}
+.tb-btn-ico{font-size:12px;opacity:.7}
+.tb-badge{background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:100px;line-height:1.4}
+.tb-sep{width:1px;height:18px;background:var(--border);margin:0 4px}
+.tb-right{margin-left:auto;font-size:11px;color:var(--ink3)}
+
+/* ── DROPDOWN ── */
+/* ── DRAWERS ── */
+.drawer-overlay{
+  position:fixed;inset:0;background:rgba(17,24,39,.22);
+  z-index:400;opacity:0;pointer-events:none;
+  transition:opacity .25s;
+}
+.drawer-overlay.open{opacity:1;pointer-events:all}
+.drawer{
+  position:fixed;top:0;bottom:0;
+  width:300px;background:var(--surface);
+  box-shadow:var(--sh2);z-index:500;
+  display:flex;flex-direction:column;
+  transform:translateX(-100%);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+.drawer.right{right:0;left:auto;transform:translateX(100%)}
+.drawer.open{transform:translateX(0)}
+.drawer-anchor{position:static}
+.dd-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.dd-title{font-size:14px;font-weight:600;color:var(--ink)}
+.dd-close{
+  background:none;border:none;cursor:pointer;color:var(--ink3);
+  font-size:20px;line-height:1;padding:0 2px;transition:color .15s;
+  display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:var(--r6);
+}
+.dd-close:hover{color:var(--ink);background:var(--s2)}
+.dd-body{padding:16px 18px;overflow-y:auto;flex:1}
+
+/* Filters inside dropdown */
+.f-sec{margin-bottom:14px}
+.f-sec:last-child{margin-bottom:0}
+.f-lbl{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.f-chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{padding:4px 10px;border-radius:100px;font-size:11px;font-weight:500;border:1.5px solid var(--border);cursor:pointer;background:none;color:var(--ink2);font-family:var(--ff);transition:all .15s}
+.chip.on{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.chip:hover:not(.on){border-color:var(--border2)}
+.f-range{width:100%;accent-color:var(--blue);margin-top:4px}
+.f-range-val{font-size:11px;color:var(--ink2);margin-top:3px}
+.f-footer{border-top:1px solid var(--border);padding:10px 16px;display:flex;justify-content:flex-end}
+.btn-reset{font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--ff)}
+
+/* Saved inside dropdown */
+.saved-item{
+  background:var(--s2);border:1px solid var(--border);
+  border-radius:var(--r10);padding:11px 13px;margin-bottom:7px;
+  transition:all .15s;
+}
+.saved-item:last-child{margin-bottom:0}
+.saved-item:hover{border-color:var(--blue-m);background:var(--blue-l)}
+.si-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px}
+.si-role{font-size:12px;font-weight:600;color:var(--ink);flex:1;line-height:1.3}
+.si-pct{font-size:12px;font-weight:700;color:var(--blue);flex-shrink:0}
+.si-co{font-size:11px;color:var(--ink3);margin-bottom:7px}
+.si-btns{display:flex;gap:5px}
+.btn-si{padding:3px 9px;font-size:10px;font-weight:500;border-radius:100px;cursor:pointer;font-family:var(--ff);border:1px solid;transition:all .15s}
+.btn-si-adapt{background:var(--blue-l);color:var(--blue);border-color:var(--blue-m)}
+.btn-si-adapt:hover{background:var(--blue);color:#fff}
+.btn-si-rm{background:none;color:var(--ink4);border-color:var(--border)}
+.btn-si-rm:hover{color:var(--no);border-color:var(--no-bd)}
+.saved-footer{border-top:1px solid var(--border);padding:10px 16px}
+.btn-all{width:100%;padding:9px;background:var(--blue);color:#fff;border:none;border-radius:var(--r8);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--ff)}
+.btn-all:hover{background:var(--blue-h)}
+.saved-empty{text-align:center;padding:24px 0;color:var(--ink3);font-size:12px;line-height:1.6}
+
+/* ── SWIPE ARENA ── */
+.arena{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px 24px 16px;overflow:hidden;position:relative;
+}
+.arena-hd{text-align:center;margin-bottom:18px}
+.arena-h{font-size:17px;font-weight:700;letter-spacing:-.3px;color:var(--ink);margin-bottom:3px}
+.arena-s{font-size:12px;color:var(--ink3)}
+
+/* ── CARD STACK ── */
+.stack{position:relative;width:420px;height:460px;flex-shrink:0}
+.vcard{
+  position:absolute;inset:0;
+  background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r28);
+  padding:22px;box-shadow:var(--sh2);
+  cursor:grab;will-change:transform;
+  transform-origin:center bottom;user-select:none;touch-action:none;
+  display:flex;flex-direction:column;
+}
+.vcard:active{cursor:grabbing}
+.vcard.back1{transform:translateY(8px) scale(.966);z-index:1;pointer-events:none}
+.vcard.back2{transform:translateY(16px) scale(.932);z-index:0;pointer-events:none}
+.vcard.front{z-index:2}
+
+/* Overlays */
+.ov{
+  position:absolute;inset:0;border-radius:var(--r28);
+  display:flex;align-items:flex-start;justify-content:flex-start;
+  padding:22px;font-size:18px;font-weight:800;letter-spacing:.5px;
+  opacity:0;pointer-events:none;border:3px solid transparent;
+}
+.ov-right{background:rgba(240,253,244,.93);color:var(--ok);border-color:var(--ok-bd);justify-content:flex-end}
+.ov-left{background:rgba(254,242,242,.93);color:var(--no);border-color:var(--no-bd)}
+.ov-up{background:rgba(239,246,255,.93);color:var(--blue);border-color:var(--blue-m);align-items:flex-start;justify-content:center}
+
+/* Card content */
+.vc-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.vc-co{font-size:11px;color:var(--ink3);margin-bottom:2px}
+.vc-role{font-size:18px;font-weight:700;color:var(--ink);letter-spacing:-.3px;line-height:1.2}
+.match-badge{
+  width:58px;height:58px;border-radius:50%;
+  border:3px solid var(--blue-m);background:var(--blue-l);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.mb-pct{font-size:16px;font-weight:800;color:var(--blue);line-height:1}
+.mb-lbl{font-size:8px;color:var(--ink3);letter-spacing:.3px;text-transform:uppercase}
+.match-badge.hi{border-color:var(--ok-bd);background:var(--ok-bg)}
+.match-badge.hi .mb-pct{color:var(--ok)}
+.vc-sal{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.vc-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--ink3);margin-bottom:12px}
+/* Insight */
+.vc-desc-short{font-size:12px;color:var(--ink2);line-height:1.55;margin-bottom:9px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vc-insight{
+  background:var(--blue-l);border:1px solid var(--blue-m);
+  border-radius:var(--r8);padding:8px 11px;
+  font-size:12px;color:var(--blue-h);line-height:1.5;margin-bottom:12px;
+}
+.vc-insight strong{font-weight:600}
+/* Footer */
+.vc-body{flex:1}
+.vc-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border);
+  flex-shrink:0;margin-top:auto;
+}
+.vc-match-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 0 12px;border-top:1px solid var(--border);
+  margin-top:auto;flex-shrink:0;
+}
+.vc-match-label{font-size:12px;color:var(--ink2);flex:1}
+
+.co-row{display:flex;align-items:center;gap:8px}
+.co-logo{width:28px;height:28px;border-radius:var(--r6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.co-name{font-size:11px;font-weight:500;color:var(--ink)}
+.co-size{font-size:10px;color:var(--ink3)}
+.btn-adapt-card{
+  padding:7px 14px;background:var(--blue);color:#fff;
+  border:none;border-radius:var(--r8);
+  font-size:12px;font-weight:600;cursor:pointer;
+  font-family:var(--ff);display:flex;align-items:center;gap:5px;
+  transition:all .15s;
+}
+.btn-adapt-card:hover{background:var(--blue-h)}
+.btn-adapt-card:active{transform:scale(.97)}
+
+/* ── CONTROLS ── */
+.controls{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  margin-top:18px;flex-shrink:0;
+}
+.btn-row{display:flex;align-items:center;gap:20px}
+.swipe-btn{
+  width:54px;height:54px;border-radius:50%;
+  border:2px solid var(--border);background:var(--surface);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:var(--sh);transition:all .2s;
+  position:relative;
+}
+.swipe-btn:hover{transform:scale(1.08);box-shadow:var(--sh2)}
+.swipe-btn:active{transform:scale(.94)}
+.btn-skip{border-color:var(--no-bd);color:var(--no)}
+.btn-skip:hover{background:var(--no-bg)}
+.btn-like{border-color:var(--ok-bd);color:var(--ok)}
+.btn-like:hover{background:var(--ok-bg)}
+.tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:10px;font-weight:500;padding:3px 7px;border-radius:var(--r6);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s}
+.swipe-btn:hover .tip{opacity:1}
+.btn-lbls{display:flex;gap:20px}
+.btn-lbl{font-size:10px;color:var(--ink4);text-align:center;width:54px}
+.kbd-row{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--ink4)}
+.kbd{background:var(--s2);border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-size:10px;font-weight:600;color:var(--ink3)}
+
+/* Counter */
+.counter-row{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:8px;flex-shrink:0}
+.counter-txt{font-size:11px;color:var(--ink3)}
+.counter-dots{display:flex;gap:4px}
+.cdot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:all .3s}
+.cdot.on{background:var(--blue);width:16px;border-radius:3px}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="01-new-landing.html" class="logo"><div class="ldot"></div>OfferMatch</a>
+  <button class="nav-link" onclick="location.href='07-new-dashboard.html'">Дашборд</button>
+  <button class="nav-link on">Мэтч</button>
+  <div class="nav-r">
+    <button class="btn-sm" onclick="location.href='07-new-dashboard.html'">← Дашборд</button>
+  </div>
+</nav>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-ov" onclick="closeAll()"></div>
+
+<!-- DRAWERS -->
+<div class="drawer" id="dd-f">
+        <div class="dd-head">
+          <span class="dd-title">Фильтры</span>
+          <button class="dd-close" onclick="toggle('f')">×</button>
+        </div>
+        <div class="dd-body">
+          <div class="f-sec">
+            <div class="f-lbl">Роль</div>
+            <div class="f-chips">
+              <button class="chip on">Data Analyst</button>
+              <button class="chip on">Product Analyst</button>
+              <button class="chip">ML Engineer</button>
+              <button class="chip">BI Developer</button>
+            </div>
+          </div>
+          <div class="f-sec">
+            <div class="f-lbl">Формат</div>
+            <div class="f-chips">
+              <button class="chip on">Удалённо</button>
+              <button class="chip on">Гибрид</button>
+              <button class="chip">Офис</button>
+            </div>
+          </div>
+          <div class="f-sec">
+            <div class="f-lbl">Зарплата от — <span id="sal-val">150 000 ₽</span></div>
+            <input type="range" class="f-range" min="50" max="400" value="150" step="10"
+              oninput="document.getElementById('sal-val').textContent=Math.round(this.value)+' 000 ₽'">
+          </div>
+          <div class="f-sec">
+            <div class="f-lbl">Компания</div>
+            <div class="f-chips">
+              <button class="chip on">Яндекс</button>
+              <button class="chip on">VK</button>
+              <button class="chip on">Ozon</button>
+              <button class="chip">Сбер</button>
+              <button class="chip">Авито</button>
+            </div>
+          </div>
+          <div class="f-sec">
+            <div class="f-lbl">Match минимум</div>
+            <div class="f-chips">
+              <button class="chip on">70%+</button>
+              <button class="chip">80%+</button>
+              <button class="chip">90%+</button>
+            </div>
+          </div>
+        </div>
+        <div class="f-footer">
+          <button class="btn-reset" onclick="document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'))">Сбросить всё</button>
+        </div>
+      </div>
+    
+<div class="drawer right" id="dd-s">
+        <div class="dd-head">
+          <span class="dd-title">Сохранённые вакансии</span>
+          <button class="dd-close" onclick="toggle('s')">×</button>
+        </div>
+        <div class="dd-body" id="saved-list">
+          <div class="saved-item">
+            <div class="si-top"><div class="si-role">Senior Data Analyst</div><div class="si-pct">88%</div></div>
+            <div class="si-co">Ozon · Москва · Удалённо</div>
+            <div class="si-btns">
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">↑ Адаптировать</button>
+              <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
+            </div>
+          </div>
+          <div class="saved-item">
+            <div class="si-top"><div class="si-role">Product Analyst</div><div class="si-pct">84%</div></div>
+            <div class="si-co">Авито · Москва · Гибрид</div>
+            <div class="si-btns">
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">↑ Адаптировать</button>
+              <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
+            </div>
+          </div>
+          <div class="saved-item">
+            <div class="si-top"><div class="si-role">ML Analyst</div><div class="si-pct">79%</div></div>
+            <div class="si-co">Сбер · Москва · Офис</div>
+            <div class="si-btns">
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">↑ Адаптировать</button>
+              <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
+            </div>
+          </div>
+        </div>
+        <div class="saved-footer">
+          <button class="btn-all" onclick="toggle('s');location.href='07-new-dashboard.html'">Смотреть все отклики →</button>
+        </div>
+      </div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+
+    <!-- Filters dropdown -->
+    <div class="drawer-anchor">
+      <button class="tb-btn" id="tb-f" onclick="toggle('f')">
+        <span class="tb-btn-ico">⊟</span>
+        Фильтры
+      </button></div>
+
+    <div class="tb-sep"></div>
+
+    <!-- Saved dropdown -->
+    <div class="drawer-anchor" style="margin-left:auto">
+      <button class="tb-btn" id="tb-s" onclick="toggle('s')">
+        <span class="tb-btn-ico">★</span>
+        Сохранённые
+        <span class="tb-badge" id="saved-cnt">3</span>
+      </button>
+    </div>
+
+    <span class="tb-right" id="tb-info" style="margin-left:12px">24 вакансии</span>
+  </div>
+
+  <!-- ARENA -->
+  <div class="arena">
+    <div class="arena-hd">
+      <div class="arena-h">Вакансии для вас</div>
+      <div class="arena-s">Тяните карточку или используйте кнопки</div>
+    </div>
+
+    <!-- STACK -->
+    <div class="stack" id="stack">
+
+      <!-- back2 -->
+      <div class="vcard back2" id="card-c">
+        <div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink4)">
+          <div style="text-align:center"><div style="font-size:28px;margin-bottom:6px;opacity:.4">⊙</div><div style="font-size:12px">Ещё вакансии</div></div>
+        </div>
+      </div>
+
+      <!-- back1 -->
+      <div class="vcard back1" id="card-b">
+        <div class="vc-head">
+          <div><div class="vc-co">VK</div><div class="vc-role">BI Developer</div></div>
+          <div class="match-badge"><div class="mb-pct">78%</div><div class="mb-lbl">match</div></div>
+        </div>
+        <div class="vc-sal">110 000 – 160 000 ₽</div>
+        <div class="vc-meta"><span>📍 Москва</span><span>💻 Гибрид</span></div>
+        <div class="vc-desc-short">Разработка BI-решений на Tableau и ClickHouse, работа с продуктовыми метриками.</div><div class="vc-insight"><strong>2 из 4 навыков совпадают.</strong> Не хватает Spark и Python — можно добавить через адаптацию.</div>
+        <div class="vc-foot">
+          <div class="co-row"><div class="co-logo" style="background:var(--blue-l);color:var(--blue)">ВК</div><div><div class="co-name">VK</div><div class="co-size">5 000+ сотр.</div></div></div>
+          <button class="btn-adapt-card" onclick="doSwipe('up')">↑ Адаптировать CV</button>
+        </div>
+      </div>
+
+      <!-- front -->
+      <div class="vcard front" id="card-a">
+        <div class="ov ov-right" id="ov-r">СОХРАНИТЬ ♡</div>
+        <div class="ov ov-left"  id="ov-l">ПРОПУСТИТЬ ✕</div>
+        <div class="ov ov-up"    id="ov-u">↑ АДАПТИРОВАТЬ</div>
+
+        <div class="vc-body">
+          <div class="vc-head">
+            <div><div class="vc-co">Яндекс</div><div class="vc-role">Data Analyst</div></div>
+            <div class="match-badge hi"><div class="mb-pct">91%</div><div class="mb-lbl">match</div></div>
+          </div>
+          <div class="vc-sal">120 000 – 180 000 ₽</div>
+          <div class="vc-meta"><span>📍 Москва</span><span>💻 Гибрид</span></div>
+          <div class="vc-desc-short">Аналитика больших данных, A/B-тесты продуктовых гипотез, ETL-пайплайны и дашборды в BI-инструментах.</div>
+        </div>
+        <div class="vc-match-row">
+          <div class="vc-match-label"><strong>4 из 6</strong> навыков совпадают · Не хватает Spark и Airflow</div>
+        </div>
+        <div class="vc-foot">
+          <div class="co-row">
+            <div class="co-logo" style="background:var(--blue-l);color:var(--blue)">Я</div>
+            <div><div class="co-name">Яндекс</div><div class="co-size">IT · 15 000+</div></div>
+          </div>
+          <button class="btn-adapt-card" onclick="doSwipe('up')">↑ Адаптировать CV</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <div class="btn-row">
+        <button class="swipe-btn btn-skip" onclick="doSwipe('left')">
+          <span>✕</span><div class="tip">Пропустить ←</div>
+        </button>
+        <button class="swipe-btn btn-like" onclick="doSwipe('right')">
+          <span>♡</span><div class="tip">Сохранить →</div>
+        </button>
+      </div>
+      <div class="btn-lbls">
+        <div class="btn-lbl">Пропустить</div>
+        <div class="btn-lbl">Сохранить</div>
+      </div>
+      <div class="kbd-row">
+        <span class="kbd">←</span> пропустить &nbsp;·&nbsp;
+        <span class="kbd">→</span> сохранить &nbsp;·&nbsp;
+        <span class="kbd">↑</span> адаптировать
+      </div>
+    </div>
+
+    <!-- COUNTER -->
+    <div class="counter-row">
+      <div class="counter-txt" id="ctr-txt">Вакансия 1 из 5</div>
+      <div class="counter-dots" id="ctr-dots"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const VACANCIES = [
+  {co:'Яндекс',role:'Data Analyst',sal:'120 000 – 180 000 ₽',loc:'Москва',fmt:'Гибрид',size:'15 000+',match:91,hi:true,logo:'Я',logoBg:'#EFF4FF',logoC:'#2563EB',ms:4,ts:6,gap:'Spark и Airflow',desc:'Аналитика больших данных, A/B-тесты продуктовых гипотез, ETL-пайплайны и дашборды в BI-инструментах.'},
+  {co:'VK',role:'BI Developer',sal:'110 000 – 160 000 ₽',loc:'Москва',fmt:'Гибрид',size:'5 000+',match:78,hi:false,logo:'ВК',logoBg:'#EFF4FF',logoC:'#2563EB',ms:2,ts:4,gap:'Spark и Python',desc:'Разработка BI-решений на Tableau и ClickHouse, работа с продуктовыми метриками.'},
+  {co:'Ozon',role:'Senior Data Analyst',sal:'160 000 – 220 000 ₽',loc:'Москва',fmt:'Удалённо',size:'10 000+',match:88,hi:true,logo:'O',logoBg:'#FEF3C7',logoC:'#92400E',ms:3,ts:4,gap:'Spark',desc:'Анализ данных e-commerce, построение ML-моделей прогнозирования спроса.'},
+  {co:'Авито',role:'Product Analyst',sal:'130 000 – 170 000 ₽',loc:'Москва',fmt:'Гибрид',size:'5 000+',match:84,hi:true,logo:'А',logoBg:'#DCFCE7',logoC:'#16A34A',ms:3,ts:4,gap:'ML',desc:'Продуктовая аналитика крупнейшего маркетплейса, воронки и когорты.'},
+  {co:'Тинькофф',role:'Data Analyst',sal:'140 000 – 190 000 ₽',loc:'Москва',fmt:'Гибрид',size:'20 000+',match:86,hi:true,logo:'Т',logoBg:'#FEF3C7',logoC:'#92400E',ms:3,ts:4,gap:'Airflow',desc:'Финтех-аналитика: кредитные риски, фрод-мониторинг, реал-тайм события.'},
+];
+let cur = 0;
+const TOTAL = VACANCIES.length;
+
+function renderCounter() {
+  document.getElementById('ctr-txt').textContent = `Вакансия ${cur + 1} из ${TOTAL}`;
+  const dotsEl = document.getElementById('ctr-dots');
+  dotsEl.innerHTML = VACANCIES.map((_,i) => `<div class="cdot${i===cur?' on':''}"></div>`).join('');
+}
+renderCounter();
+
+function cardHTML(v, withOverlays) {
+  const badge = `<div class="match-badge${v.hi?' hi':''}"><div class="mb-pct">${v.match}%</div><div class="mb-lbl">match</div></div>`;
+  const footer = `<div class="vc-foot">
+    <div class="co-row">
+      <div class="co-logo" style="background:${v.logoBg};color:${v.logoC}">${v.logo}</div>
+      <div><div class="co-name">${v.co}</div><div class="co-size">IT · ${v.size}</div></div>
+    </div>
+    <button class="btn-adapt-card" onclick="doSwipe('up')">↑ Адаптировать CV</button>
+  </div>`;
+  const matchRow = `<div class="vc-match-row">
+    <div class="vc-match-label"><strong>${v.ms} из ${v.ts}</strong> навыков · Не хватает ${v.gap}</div>
+  </div>`;
+  const overlays = withOverlays ? `
+    <div class="ov ov-right" id="ov-r">СОХРАНИТЬ ♡</div>
+    <div class="ov ov-left"  id="ov-l">ПРОПУСТИТЬ ✕</div>
+    <div class="ov ov-up"    id="ov-u">↑ АДАПТИРОВАТЬ</div>` : '';
+  return `${overlays}
+    <div class="vc-body">
+      <div class="vc-head">
+        <div><div class="vc-co">${v.co}</div><div class="vc-role">${v.role}</div></div>
+        ${badge}
+      </div>
+      <div class="vc-sal">${v.sal}</div>
+      <div class="vc-meta"><span>📍 ${v.loc}</span><span>💻 ${v.fmt}</span></div>
+      ${v.desc ? `<div class="vc-desc-short">${v.desc}</div>` : ''}
+    </div>
+    ${matchRow}${footer}`;
+}
+
+function rebuildStack() {
+  const stack = document.getElementById('stack');
+  stack.innerHTML = '';
+  // back2
+  const c2 = vac(cur + 2);
+  const d2 = document.createElement('div');
+  d2.className = 'vcard back2'; d2.id = 'card-c';
+  d2.innerHTML = c2 ? cardHTML(c2, false) : `<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink4)"><div style="text-align:center"><div style="font-size:28px;opacity:.3;margin-bottom:6px">⊙</div><div style="font-size:12px">Конец стека</div></div></div>`;
+  stack.appendChild(d2);
+  // back1
+  const c1 = vac(cur + 1);
+  const d1 = document.createElement('div');
+  d1.className = 'vcard back1'; d1.id = 'card-b';
+  d1.innerHTML = c1 ? cardHTML(c1, false) : '';
+  stack.appendChild(d1);
+  // front
+  const cf = vac(cur);
+  const df = document.createElement('div');
+  df.className = 'vcard front'; df.id = 'card-a';
+  df.innerHTML = cf ? cardHTML(cf, true) : `<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--ink2)"><div style="text-align:center"><div style="font-size:32px;margin-bottom:10px">🎉</div><div style="font-size:14px;font-weight:500">Вы просмотрели все вакансии!</div><div style="font-size:12px;color:var(--ink3);margin-top:4px">Посмотрите сохранённые</div></div></div>`;
+  stack.appendChild(df);
+  if (cf) attachDrag(df);
+}
+
+function vac(idx) { return VACANCIES[idx % TOTAL]; }
+
+/* ── SWIPE ── */
+function doSwipe(dir) {
+  const card = document.getElementById('card-a');
+  if (!card || card.dataset.anim) return;
+  card.dataset.anim = '1';
+  let tx = 0, ty = 0, rot = 0;
+  if (dir === 'right') { tx = 900; rot = 25; addSaved(); }
+  else if (dir === 'left') { tx = -900; rot = -25; }
+  else if (dir === 'up') { ty = -900; }
+  card.style.transition = 'transform .38s cubic-bezier(.4,0,.2,1),opacity .38s';
+  card.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
+  card.style.opacity = '0';
+  if (dir === 'up') { setTimeout(() => location.href = '04-new-qa.html', 370); return; }
+  setTimeout(() => {
+    cur = (cur + 1) % TOTAL;
+    rebuildStack();
+    renderCounter();
+  }, 400);
+}
+
+function addSaved() {
+  const v = vac(cur);
+  const list = document.getElementById('saved-list');
+  const item = document.createElement('div');
+  item.className = 'saved-item';
+  item.innerHTML = `
+    <div class="si-top"><div class="si-role">${v.role}</div><div class="si-pct">${v.match}%</div></div>
+    <div class="si-co">${v.co} · ${v.loc} · ${v.fmt}</div>
+    <div class="si-btns">
+      <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">↑ Адаптировать</button>
+      <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
+    </div>`;
+  list.prepend(item);
+  updateSavedCount();
+}
+
+function removeItem(btn) {
+  btn.closest('.saved-item').remove();
+  updateSavedCount();
+}
+
+function updateSavedCount() {
+  const n = document.getElementById('saved-list').querySelectorAll('.saved-item').length;
+  document.getElementById('saved-cnt').textContent = n;
+}
+
+/* ── DRAG ── */
+function attachDrag(card) {
+  let sx, sy, dragging = false;
+  const THRESH = 80, THRESH_UP = 60;
+  function pos(e) { return e.touches ? {x:e.touches[0].clientX,y:e.touches[0].clientY} : {x:e.clientX,y:e.clientY}; }
+  function start(e) {
+    if (card.dataset.anim) return;
+    dragging = true; const p = pos(e); sx = p.x; sy = p.y;
+    card.style.transition = 'none'; card.style.cursor = 'grabbing';
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', end);
+    document.addEventListener('touchmove', move, {passive:false});
+    document.addEventListener('touchend', end);
+  }
+  function move(e) {
+    if (!dragging) return;
+    if (e.preventDefault) e.preventDefault();
+    const p = pos(e), dx = p.x - sx, dy = p.y - sy;
+    card.style.transform = `translate(${dx}px,${dy}px) rotate(${dx * .07}deg)`;
+    const r = Math.min(Math.abs(dx) / THRESH, 1);
+    const u = dy < -20 && Math.abs(dx) < 70 ? Math.min(Math.abs(dy) / THRESH_UP, 1) : 0;
+    const ovR = document.getElementById('ov-r');
+    const ovL = document.getElementById('ov-l');
+    const ovU = document.getElementById('ov-u');
+    if (u > 0) { if(ovR)ovR.style.opacity=0; if(ovL)ovL.style.opacity=0; if(ovU)ovU.style.opacity=u; }
+    else if (dx > 15) { if(ovR)ovR.style.opacity=r; if(ovL)ovL.style.opacity=0; if(ovU)ovU.style.opacity=0; }
+    else if (dx < -15) { if(ovL)ovL.style.opacity=r; if(ovR)ovR.style.opacity=0; if(ovU)ovU.style.opacity=0; }
+    else { if(ovR)ovR.style.opacity=0; if(ovL)ovL.style.opacity=0; if(ovU)ovU.style.opacity=0; }
+  }
+  function end(e) {
+    if (!dragging) return; dragging = false; card.style.cursor = 'grab';
+    document.removeEventListener('mousemove', move); document.removeEventListener('mouseup', end);
+    document.removeEventListener('touchmove', move); document.removeEventListener('touchend', end);
+    ['ov-r','ov-l','ov-u'].forEach(id => { const el = document.getElementById(id); if(el) el.style.opacity = 0; });
+    const p = e.changedTouches ? {x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY} : {x:e.clientX,y:e.clientY};
+    const dx = p.x - sx, dy = p.y - sy;
+    if (dy < -THRESH_UP && Math.abs(dx) < 100) { doSwipe('up'); }
+    else if (dx > THRESH) { doSwipe('right'); }
+    else if (dx < -THRESH) { doSwipe('left'); }
+    else {
+      card.style.transition = 'transform .3s cubic-bezier(.2,.8,.3,1.2)';
+      card.style.transform = 'translate(0,0) rotate(0)';
+    }
+  }
+  card.addEventListener('mousedown', start);
+  card.addEventListener('touchstart', start, {passive:true});
+}
+attachDrag(document.getElementById('card-a'));
+
+/* ── KEYBOARD ── */
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight') doSwipe('right');
+  else if (e.key==='ArrowLeft') doSwipe('left');
+  else if (e.key==='ArrowUp') doSwipe('up');
+});
+
+/* ── TOOLBAR DROPDOWNS ── */
+function toggle(which) {
+  const ddF = document.getElementById('dd-f');
+  const ddS = document.getElementById('dd-s');
+  const ov  = document.getElementById('drawer-ov');
+  const tbF = document.getElementById('tb-f');
+  const tbS = document.getElementById('tb-s');
+  if (which === 'f') {
+    const open = !ddF.classList.contains('open');
+    ddF.classList.toggle('open', open);
+    ddS.classList.remove('open');
+    tbF.classList.toggle('active', open);
+    tbS.classList.remove('active');
+    ov.classList.toggle('open', open);
+  } else {
+    const open = !ddS.classList.contains('open');
+    ddS.classList.toggle('open', open);
+    ddF.classList.remove('open');
+    tbS.classList.toggle('active', open);
+    tbF.classList.remove('active');
+    ov.classList.toggle('open', open);
+  }
+}
+function closeAll() {
+  document.getElementById('dd-f').classList.remove('open');
+  document.getElementById('dd-s').classList.remove('open');
+  document.getElementById('drawer-ov').classList.remove('open');
+  document.getElementById('tb-f').classList.remove('active');
+  document.getElementById('tb-s').classList.remove('active');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+
+/* ── FILTER CHIPS ── */
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => c.classList.toggle('on')));
+</script>
+</body>
+</html>

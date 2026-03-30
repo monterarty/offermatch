@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Дашборд</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F0F4FF;--surface:#fff;--s2:#F7F9FF;--border:#E2E8F8;--border2:#C8D4F0;--ink:#111827;--ink2:#6B7280;--ink3:#9CA3AF;--ink4:#D1D5DB;--blue:#2563EB;--blue-h:#1D4ED8;--blue-l:#EFF4FF;--blue-m:#BFCFFE;--ok:#16A34A;--ok-bg:#F0FDF4;--ok-bd:#BBF7D0;--warn:#CA8A04;--warn-bg:#FEFCE8;--r6:6px;--r10:10px;--r14:14px;--r20:20px;--r28:28px;--sh:0 1px 3px rgba(17,24,39,.07);--sh2:0 4px 16px rgba(17,24,39,.08);--ff:'Inter',sans-serif;}
+body{font-family:var(--ff);background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;padding:0 28px;gap:20px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.logo{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:7px;letter-spacing:-.3px}
+.ldot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-link{font-size:13px;color:var(--ink2);padding:5px 11px;border-radius:var(--r6);border:none;background:none;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.nav-link:hover{background:var(--blue-l);color:var(--blue)}
+.nav-link.on{color:var(--blue);background:var(--blue-l);font-weight:500}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.user-av{width:28px;height:28px;border-radius:50%;background:var(--blue-l);border:1.5px solid var(--blue-m);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--blue);cursor:pointer}
+.btn-new{padding:7px 16px;background:var(--blue);color:#fff;border:none;border-radius:var(--r6);font-family:var(--ff);font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.btn-new:hover{background:var(--blue-h)}
+
+.layout{display:flex;padding-top:54px;min-height:100vh}
+.leftnav{width:220px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:20px 12px;position:sticky;top:54px;height:calc(100vh - 54px);display:flex;flex-direction:column;overflow-y:auto}
+.ln-sec{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink4);padding:0 8px;margin:12px 0 6px}
+.ln-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r10);font-size:13px;color:var(--ink2);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:var(--ff);text-decoration:none}
+.ln-item:hover{color:var(--ink);background:var(--s2)}
+.ln-item.on{color:var(--blue);background:var(--blue-l);font-weight:500}
+.ln-ico{width:16px;text-align:center;font-size:14px;flex-shrink:0}
+
+.main{flex:1;padding:28px 32px;overflow-y:auto;background:var(--bg)}
+.dash-h{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:3px}
+.dash-s{font-size:13px;color:var(--ink2);margin-bottom:24px}
+
+/* Token bar */
+.token-bar{background:var(--surface);border:1px solid var(--border);border-radius:var(--r14);padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:22px;box-shadow:var(--sh)}
+.tk-label{font-size:12px;color:var(--ink2);flex:1}
+.tk-track{width:160px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.tk-fill{height:100%;background:var(--blue);border-radius:3px;width:75%}
+.tk-count{font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+.btn-tk{padding:6px 14px;background:var(--warn-bg);color:var(--warn);border:1px solid #FDE68A;border-radius:var(--r6);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--ff);white-space:nowrap;transition:all .15s}
+.btn-tk:hover{background:var(--warn);color:#fff}
+
+/* Quick actions */
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.qc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r20);padding:18px;cursor:pointer;transition:all .18s;text-decoration:none;display:block;box-shadow:var(--sh)}
+.qc:hover{transform:translateY(-2px);box-shadow:var(--sh2);border-color:var(--border2)}
+.qc.prim{background:var(--blue);border-color:var(--blue)}
+.qc-ico{font-size:20px;margin-bottom:9px}
+.qc-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.qc.prim .qc-t{color:#fff}
+.qc-s{font-size:11px;color:var(--ink3)}
+.qc.prim .qc-s{color:rgba(255,255,255,.55)}
+
+.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r20);padding:20px;box-shadow:var(--sh)}
+.card-h{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;display:flex;align-items:center;justify-content:space-between}
+.card-sub{font-size:11px;color:var(--ink3);margin-bottom:12px}
+.card-link{font-size:12px;color:var(--blue);cursor:pointer;font-weight:400}
+.status{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;white-space:nowrap}
+.s-analysis{background:var(--s2);color:var(--ink3);border:1px solid var(--border)}
+.s-adapted{background:var(--blue-l);color:var(--blue);border:1px solid var(--blue-m)}
+.s-letter{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok-bd)}
+.arc-item{background:var(--s2);border:1px solid var(--border);border-radius:var(--r14);padding:11px 13px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .15s;margin-bottom:6px}
+.arc-item:last-child{margin-bottom:0}
+.arc-item:hover{border-color:var(--border2);background:var(--blue-l)}
+.arc-pct{width:40px;height:40px;border-radius:50%;border:2.5px solid var(--blue-m);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--blue);flex-shrink:0}
+.arc-info{flex:1;min-width:0}
+.arc-name{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arc-meta{font-size:11px;color:var(--ink3);margin-bottom:4px}
+.arc-actions{display:flex;gap:5px;flex-shrink:0}
+.btn-arc{padding:4px 9px;background:none;border:1px solid var(--border);border-radius:var(--r6);font-size:11px;color:var(--ink2);cursor:pointer;font-family:var(--ff);transition:all .15s;white-space:nowrap}
+.btn-arc:hover{border-color:var(--blue);color:var(--blue)}
+.btn-arc-primary{background:var(--blue-l);color:var(--blue);border-color:var(--blue-m)}
+.btn-arc-primary:hover{background:var(--blue);color:#fff}
+.saved-item{background:var(--s2);border:1px solid var(--border);border-radius:var(--r14);padding:11px 13px;margin-bottom:6px;transition:all .15s}
+.saved-item:last-child{margin-bottom:0}
+.saved-item:hover{border-color:var(--border2)}
+.si-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px}
+.si-role{font-size:12px;font-weight:600;color:var(--ink);flex:1;line-height:1.35}
+.si-pct{font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0}
+.si-meta{font-size:11px;color:var(--ink3);margin-bottom:7px}
+.si-actions{display:flex;gap:5px}
+.stats-col{display:flex;flex-direction:column;gap:8px}
+.stat-item{display:flex;align-items:center;gap:11px;padding:9px 12px;background:var(--s2);border-radius:var(--r10)}
+.stat-val{font-size:20px;font-weight:700;color:var(--ink);line-height:1}
+.stat-lbl{font-size:11px;color:var(--ink3);margin-top:1px}
+
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="01-new-landing.html" class="logo"><div class="ldot"></div>OfferMatch</a>
+  <button class="nav-link on">Дашборд</button>
+  <button class="nav-link" onclick="location.href='08-new-match.html'">Мэтч</button>
+  <button class="nav-link">Мои резюме</button>
+  <div class="nav-r">
+    <span style="font-size:13px;color:var(--ink2)">Анна И.</span>
+    <div class="user-av">АИ</div>
+    <a href="01-new-landing.html" class="btn-new">+ Новый отклик</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <nav class="leftnav">
+    <div class="ln-sec">Главное</div>
+    <a href="07-new-dashboard.html" class="ln-item on"><span class="ln-ico">⊞</span>Дашборд</a>
+    <a href="01-new-landing.html" class="ln-item"><span class="ln-ico">+</span>Новый отклик</a>
+    <a href="08-new-match.html" class="ln-item"><span class="ln-ico">♣</span>Мэтч-механика</a>
+    <div class="ln-sec">Материалы</div>
+    <a class="ln-item" onclick="scrollTo('saved-section')"><span class="ln-ico">★</span>Сохранённые вакансии</a>
+    <a class="ln-item" onclick="scrollTo('archive-section')"><span class="ln-ico">◫</span>Архив откликов</a>
+    <a class="ln-item"><span class="ln-ico">✉</span>Письма</a>
+    <a class="ln-item"><span class="ln-ico">📄</span>Мои резюме</a>
+    <div class="ln-sec">Аккаунт</div>
+    <a class="ln-item"><span class="ln-ico">◎</span>Токены</a>
+    <a class="ln-item"><span class="ln-ico">⚙</span>Настройки</a>
+  </nav>
+
+  <main class="main">
+    <div class="dash-h">Добрый день, Анна</div>
+    <div class="dash-s">Вот ваш прогресс в поиске работы</div>
+
+    <div class="token-bar">
+      <span class="tk-label">Баланс токенов — 1 токен за генерацию</span>
+      <div class="tk-track"><div class="tk-fill"></div></div>
+      <span class="tk-count">15 / 20</span>
+      <button class="tk-btn btn-tk">Пополнить</button>
+    </div>
+
+    <div class="quick">
+      <a href="01-new-landing.html" class="qc prim">
+        <div class="qc-ico">✦</div>
+        <div class="qc-t">Новый отклик</div>
+        <div class="qc-s">CV + вакансия</div>
+      </a>
+      <a href="08-new-match.html" class="qc">
+        <div class="qc-ico">⊙</div>
+        <div class="qc-t">Мэтч-механика</div>
+        <div class="qc-s">Свайпай вакансии</div>
+      </a>
+      <a href="03-new-results.html" class="qc">
+        <div class="qc-ico">↗</div>
+        <div class="qc-t">Последний результат</div>
+        <div class="qc-s">Яндекс — 91% match</div>
+      </a>
+    </div>
+
+    <!-- Saved + Archive side by side -->
+    <div class="content-grid">
+
+      <!-- Сохранённые вакансии (из свайпа) -->
+      <div class="card" id="saved-section">
+        <div class="card-h">Сохранённые вакансии <span class="card-link" onclick="location.href='08-new-match.html'">Найти ещё →</span></div>
+        <div class="card-sub">Отложены со свайпа — ещё не адаптировали резюме</div>
+
+        <div class="saved-item">
+          <div class="si-top"><div class="si-role">Senior Data Analyst</div><div class="si-pct">88%</div></div>
+          <div class="si-meta">Ozon · Москва · Удалённо</div>
+          <div class="si-actions">
+            <button class="btn-arc btn-arc-primary" onclick="location.href='04-new-qa.html'">↑ Адаптировать CV</button>
+            <button class="btn-arc">Детали</button>
+            <button class="btn-arc">✕</button>
+          </div>
+        </div>
+
+        <div class="saved-item">
+          <div class="si-top"><div class="si-role">Product Analyst</div><div class="si-pct">84%</div></div>
+          <div class="si-meta">Авито · Москва · Гибрид</div>
+          <div class="si-actions">
+            <button class="btn-arc btn-arc-primary" onclick="location.href='04-new-qa.html'">↑ Адаптировать CV</button>
+            <button class="btn-arc">Детали</button>
+            <button class="btn-arc">✕</button>
+          </div>
+        </div>
+
+        <div class="saved-item">
+          <div class="si-top"><div class="si-role">ML Analyst</div><div class="si-pct">79%</div></div>
+          <div class="si-meta">Сбер · Москва · Офис</div>
+          <div class="si-actions">
+            <button class="btn-arc btn-arc-primary" onclick="location.href='04-new-qa.html'">↑ Адаптировать CV</button>
+            <button class="btn-arc">Детали</button>
+            <button class="btn-arc">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Архив откликов (адаптированные CV) -->
+      <div class="card" id="archive-section">
+        <div class="card-h">Архив откликов <span class="card-link">Все →</span></div>
+        <div class="card-sub">Вакансии с готовым CV и письмом</div>
+
+        <div class="arc-item" onclick="location.href='03-new-results.html'">
+          <div class="arc-pct" style="border-color:var(--ok-bd);color:var(--ok)">91%</div>
+          <div class="arc-info">
+            <div class="arc-name">Data Analyst · Яндекс</div>
+            <div class="arc-meta">Сегодня, 14:32</div>
+            <span class="status s-letter">Письмо готово</span>
+          </div>
+          <div class="arc-actions">
+            <button class="btn-arc">PDF</button>
+            <button class="btn-arc">Письмо</button>
+          </div>
+        </div>
+
+        <div class="arc-item">
+          <div class="arc-pct" style="border-color:var(--blue-m);color:var(--blue)">88%</div>
+          <div class="arc-info">
+            <div class="arc-name">Senior Analyst · Ozon</div>
+            <div class="arc-meta">14 марта</div>
+            <span class="status s-adapted">Резюме адаптировано</span>
+          </div>
+          <div class="arc-actions">
+            <button class="btn-arc">PDF</button>
+            <button class="btn-arc">+ Письмо</button>
+          </div>
+        </div>
+
+        <div class="arc-item">
+          <div class="arc-pct" style="border-color:var(--warn-bg);color:var(--warn)">71%</div>
+          <div class="arc-info">
+            <div class="arc-name">ML Engineer · VK</div>
+            <div class="arc-meta">Вчера, 18:05</div>
+            <span class="status s-analysis">Только анализ</span>
+          </div>
+          <div class="arc-actions">
+            <button class="btn-arc btn-arc-primary">Доделать</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats full width -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-h">Статистика поиска</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px">
+        <div class="stat-item"><div><div class="stat-val">6</div><div class="stat-lbl">анализов резюме</div></div></div>
+        <div class="stat-item"><div><div class="stat-val" style="color:var(--blue)">82%</div><div class="stat-lbl">средний match</div></div></div>
+        <div class="stat-item"><div><div class="stat-val">4</div><div class="stat-lbl">сопроводительных</div></div></div>
+        <div class="stat-item"><div><div class="stat-val">3</div><div class="stat-lbl">сохранено вакансий</div></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
