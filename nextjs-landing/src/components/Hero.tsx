@@ -47,7 +47,7 @@ export default function Hero() {
         </h1>
 
         {/* Subheading */}
-        <p className="text-base md:text-[17px] text-white/95 leading-snug max-w-[480px] mx-auto mb-10 font-normal px-4">
+        <p className="text-base md:text-[17px] text-white/95 leading-snug max-w-[480px] mx-auto mb-16 font-normal px-4">
           Отправь резюме и&nbsp;вакансию боту&nbsp;— ИИ оценит соответствие, усилит резюме и&nbsp;напишет сопроводительное за&nbsp;30&nbsp;секунд.
         </p>
 
