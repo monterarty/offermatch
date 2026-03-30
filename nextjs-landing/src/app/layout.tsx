@@ -16,13 +16,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OfferMatch — Умная адаптация резюме",
     description: "Отправь резюме и вакансию боту — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
-    images: [{ url: "/og-image.png" }],
+    images: [{ url: "/og-image.jpg" }],
   },
   twitter: {
     card: "summary",
     title: "OfferMatch — Умная адаптация резюме",
     description: "Отправь резюме и вакансию боту — ИИ оценит соответствие, усилит резюме и напишет сопроводительное за 30 секунд.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 
