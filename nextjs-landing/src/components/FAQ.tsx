@@ -54,7 +54,7 @@ export default function FAQ() {
             >
               <button
                 onClick={() => toggle(i)}
-                className="flex items-center justify-between w-full p-4 md:p-5 gap-3 text-sm font-medium text-navy bg-transparent border-none cursor-pointer text-left transition-colors hover:bg-bg"
+                className="flex items-center justify-between w-full p-4 md:p-5 gap-3 text-sm font-medium text-navy bg-transparent border-none cursor-pointer text-left transition-colors hover:bg-blue-l/40"
               >
                 {faq.q}
                 <span
