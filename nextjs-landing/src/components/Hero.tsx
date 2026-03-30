@@ -64,7 +64,7 @@ export default function Hero() {
       </div>
 
       {/* Social Proof */}
-      <div className="relative z-[5] mt-12 text-[12.5px] text-t3 flex items-center gap-2.5 font-normal">
+      <div className="relative z-[5] mt-20 text-[12.5px] text-t3 flex items-center gap-2.5 font-normal">
         <div className="flex">
           {[
             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=56&h=56&fit=crop&crop=face",
