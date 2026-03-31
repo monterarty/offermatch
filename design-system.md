@@ -80,7 +80,7 @@
 
 | Токен | Hex | Назначение |
 |---|---|---|
-| `--amber` | #D97706 | Предупреждения |
+| `--amber` | #F59E0B | Предупреждения |
 | `--coral` | #FF007F | Ошибки, низкий match |
 
 ---
@@ -122,13 +122,15 @@ background: linear-gradient(180deg, #3E80F8 0%, #6B9FFA 40%, #F6F7FB 75%);
 
 | Тип | Фон | Текст | Обводка | Скругление |
 |---|---|---|---|---|
-| CTA (primary) | `--blue` | #FFF | нет | `--r8` |
-| Ghost (secondary) | transparent | `--navy3` | `--border2` | `--r8` |
-| Analyze (large) | `--blue` | #FFF | нет | `--r16` |
+| CTA (primary) | `--blue` | #FFF | нет | `--r12` |
+| Ghost (secondary) | transparent | `--navy3` | `--border2` | `--r12` |
+| Analyze (large) | `--blue` | #FFF | нет | `--r12` |
 | Pricing ghost | transparent | `--navy3` | #C5D9FF | `--r12` |
 | Pricing main | `--blue` | #FFF | `--blue` | `--r12` |
 
 **Hover:** translateY(-1px), затемнение фона до `--blue-d`
+
+**Без стрелок:** текст кнопок не содержит стрелок (→, ←, >, <). Только текст действия.
 
 ### Бейджи / Теги
 

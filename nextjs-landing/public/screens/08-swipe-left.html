@@ -3,7 +3,11 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OfferMatch — Мэтч</title>
+<title>OfferMatch — Свайп влево</title>
+<style>
+.vcard.front{transform:translate(-60px,0) rotate(-4deg) !important}
+.ov-left{opacity:.85 !important}
+</style>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -256,17 +260,16 @@ nav{
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 </style>
-<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="01-new-landing.html" class="logo"><img src="../Liblary/offer_match_2.png" alt="OfferMatch" style="height:24px"></a>
-  <button class="nav-link" onclick="location.href='07-new-dashboard (1).html'">Дашборд</button>
+  <a href="/" class="logo"><img src="offer_match_2.png" alt="OfferMatch" style="height:24px"></a>
+  <button class="nav-link" onclick="location.href='07-dashboard.html'">Дашборд</button>
   <button class="nav-link on">Мэтч</button>
   <div class="nav-r">
-    <button class="btn-sm" onclick="location.href='07-new-dashboard (1).html'">Дашборд</button>
+    <button class="btn-sm" onclick="location.href='07-dashboard.html'">Дашборд</button>
   </div>
 </nav>
 
@@ -336,7 +339,7 @@ nav{
             <div class="si-top"><div class="si-role">Senior Data Analyst</div><div class="si-pct">88%</div></div>
             <div class="si-co">Ozon · Москва · Удалённо</div>
             <div class="si-btns">
-              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">Адаптировать</button>
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-qa.html'">Адаптировать</button>
               <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
             </div>
           </div>
@@ -344,7 +347,7 @@ nav{
             <div class="si-top"><div class="si-role">Product Analyst</div><div class="si-pct">84%</div></div>
             <div class="si-co">Авито · Москва · Гибрид</div>
             <div class="si-btns">
-              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">Адаптировать</button>
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-qa.html'">Адаптировать</button>
               <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
             </div>
           </div>
@@ -352,13 +355,13 @@ nav{
             <div class="si-top"><div class="si-role">ML Analyst</div><div class="si-pct">79%</div></div>
             <div class="si-co">Сбер · Москва · Офис</div>
             <div class="si-btns">
-              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">Адаптировать</button>
+              <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-qa.html'">Адаптировать</button>
               <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
             </div>
           </div>
         </div>
         <div class="saved-footer">
-          <button class="btn-all" onclick="toggle('s');location.href='07-new-dashboard (1).html'">Смотреть все отклики</button>
+          <button class="btn-all" onclick="toggle('s');location.href='07-dashboard.html'">Смотреть все отклики</button>
         </div>
       </div>
 
@@ -555,7 +558,7 @@ function doSwipe(dir) {
   card.style.transition = 'transform .38s cubic-bezier(.4,0,.2,1),opacity .38s';
   card.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
   card.style.opacity = '0';
-  if (dir === 'up') { setTimeout(() => location.href = '04-new-qa.html', 370); return; }
+  if (dir === 'up') { setTimeout(() => location.href = '04-qa.html', 370); return; }
   setTimeout(() => {
     cur = (cur + 1) % TOTAL;
     rebuildStack();
@@ -572,7 +575,7 @@ function addSaved() {
     <div class="si-top"><div class="si-role">${v.role}</div><div class="si-pct">${v.match}%</div></div>
     <div class="si-co">${v.co} · ${v.loc} · ${v.fmt}</div>
     <div class="si-btns">
-      <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-new-qa.html'">Адаптировать</button>
+      <button class="btn-si btn-si-adapt" onclick="toggle('s');location.href='04-qa.html'">Адаптировать</button>
       <button class="btn-si btn-si-rm" onclick="removeItem(this)">✕</button>
     </div>`;
   list.prepend(item);

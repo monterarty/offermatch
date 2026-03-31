@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OfferMatch — Прототипы экранов</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F6F7FB;color:#0F172A;min-height:100vh;padding:48px 24px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto}
+h1{font-size:28px;font-weight:700;letter-spacing:-.5px;margin-bottom:8px}
+.sub{font-size:14px;color:#64748B;margin-bottom:32px}
+.list{display:flex;flex-direction:column;gap:8px}
+a{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid #E4E6F0;border-radius:12px;text-decoration:none;color:#0F172A;transition:all .15s}
+a:hover{border-color:#BFDBFE;background:#EBF2FF}
+.num{width:28px;height:28px;border-radius:50%;background:#EBF2FF;color:#3B7EF8;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.name{font-size:14px;font-weight:500}
+.desc{font-size:12px;color:#94A3B8;margin-top:2px}
+.sep{height:1px;background:#E4E6F0;margin:16px 0}
+.sec{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94A3B8;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>OfferMatch — Прототипы</h1>
+  <div class="sub">Все экраны сервиса для просмотра и&nbsp;тестирования</div>
+
+  <div class="sec">Основной флоу</div>
+  <div class="list">
+    <a href="02-loading.html"><div class="num">02</div><div><div class="name">Загрузка + авторизация</div><div class="desc">Анализ резюме, модалка входа</div></div></a>
+    <a href="03-results.html"><div class="num">03</div><div><div class="name">Результаты анализа</div><div class="desc">Match 78%, таблица соответствия, скилы</div></div></a>
+    <a href="04-qa.html"><div class="num">04</div><div><div class="name">Уточняющие вопросы</div><div class="desc">3 вопроса от AI, варианты ответов</div></div></a>
+    <a href="05-adapted.html"><div class="num">05</div><div><div class="name">Адаптация резюме</div><div class="desc">Просмотр, редактирование, принятие правок</div></div></a>
+    <a href="06-letter.html"><div class="num">06</div><div><div class="name">Сопроводительное письмо</div><div class="desc">Выбор тона и длины, генерация</div></div></a>
+  </div>
+
+  <div class="sep"></div>
+  <div class="sec">Дашборд и мэтч</div>
+  <div class="list">
+    <a href="07-dashboard.html"><div class="num">07</div><div><div class="name">Дашборд</div><div class="desc">Архив откликов, сохранённые вакансии, статистика</div></div></a>
+    <a href="08-match.html"><div class="num">08</div><div><div class="name">Мэтч-механика</div><div class="desc">Свайп вакансий, фильтры</div></div></a>
+  </div>
+
+  <div class="sep"></div>
+  <div class="sec">Состояния свайпа</div>
+  <div class="list">
+    <a href="08-swipe-right.html"><div class="num">→</div><div><div class="name">Свайп вправо</div><div class="desc">Сохранить вакансию</div></div></a>
+    <a href="08-swipe-left.html"><div class="num">←</div><div><div class="name">Свайп влево</div><div class="desc">Пропустить вакансию</div></div></a>
+  </div>
+</div>
+</body>
+</html>
