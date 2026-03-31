@@ -27,7 +27,16 @@ jobs:
 
       - name: Build static export
         working-directory: nextjs-landing
-        run: npm run build
+        run: |
+          npm run build
+          # Copy .html files into folders as index.html for nginx compatibility
+          for f in out/*.html; do
+            name=$(basename "$f" .html)
+            if [ "$name" != "index" ] && [ "$name" != "404" ]; then
+              mkdir -p "out/$name"
+              cp "$f" "out/$name/index.html"
+            fi
+          done
 
       - name: Set up SSH
         run: |
