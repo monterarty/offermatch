@@ -68,7 +68,7 @@ export default function ProductLanding() {
             </p>
 
             {/* Widget */}
-            <div className="w-full max-w-[900px] bg-white border border-border rounded-[28px] overflow-hidden text-left">
+            <div id="s-widget" className="w-full max-w-[900px] bg-white border border-border rounded-[28px] overflow-hidden text-left">
               <div className="px-7 pt-6 flex items-start justify-between gap-5">
                 <div>
                   <div className="text-xl font-bold tracking-tight text-navy mb-1">Загрузи вакансию</div>
@@ -260,7 +260,7 @@ export default function ProductLanding() {
                 <ul className="flex flex-col gap-2.5 mb-6 flex-1 list-none p-0">
                   {["Анализ резюме относительно вакансии", "Адаптация резюме под конкретную позицию", "Подробный match-отчёт", "Сопроводительное письмо"].map((f) => (<li key={f} className="text-[13px] text-navy3 flex items-start gap-2 leading-snug"><svg className="w-4 h-4 text-blue flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>{f}</li>))}
                 </ul>
-                <a href="/screens/02-loading.html" className="block text-center w-full py-3 px-4 rounded-xl text-[13.5px] font-semibold text-white bg-blue border-[1.5px] border-blue transition-all hover:bg-blue-d hover:-translate-y-px no-underline mt-auto">Попробовать бесплатно</a>
+                <button onClick={() => document.getElementById("s-widget")?.scrollIntoView({ behavior: "smooth", block: "center" })} className="block text-center w-full py-3 px-4 rounded-xl text-[13.5px] font-semibold text-white bg-blue border-[1.5px] border-blue transition-all hover:bg-blue-d hover:-translate-y-px cursor-pointer mt-auto">Попробовать бесплатно</button>
               </div>
               <div className="bg-white border-[1.5px] border-[#D4E4FF] rounded-[28px] p-8 relative flex flex-col transition-all hover:-translate-y-1 hover:border-blue-side">
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-t3 text-white text-[10px] font-bold px-3.5 py-1 rounded-full tracking-wide whitespace-nowrap">СКОРО</div>
